@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Froject — умный трекер проектов</title>
+    <!-- Google Font for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Feather icons script. Icons will be replaced via JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <span class="logo">Froject</span>
+                <span class="logo-badge">beta</span>
+            </div>
+            <ul class="nav-list">
+                <li class="nav-item active" data-section="dashboard"><i data-feather="home"></i><span>Главная</span></li>
+                <li class="nav-item" data-section="calendar"><i data-feather="calendar"></i><span>Календарь</span></li>
+                <li class="nav-item" data-section="tasks"><i data-feather="check-square"></i><span>Задачи</span></li>
+                <li class="nav-item" data-section="projects"><i data-feather="layers"></i><span>Проекты</span></li>
+                <li class="nav-item" data-section="chat"><i data-feather="message-circle"></i><span>Сообщения</span></li>
+            </ul>
+
+            <!-- Bottom actions pinned to the bottom like in your mockups -->
+            <ul class="nav-bottom">
+                <li class="nav-item" data-section="settings"><i data-feather="settings"></i><span>Настройки</span></li>
+                <li class="nav-item" data-section="support"><i data-feather="life-buoy"></i><span>Поддержка</span></li>
+            </ul>
+        </nav>
+
+        <!-- Main content area -->
+        <main class="content">
+            <!-- Top bar with page title and user info -->
+            <header class="topbar">
+                <h1 id="page-title">Главная</h1>
+                <div class="profile-info">
+                    <button class="profile-btn" id="profile-btn" aria-label="Открыть профиль">
+                        <span class="avatar frog" aria-hidden="true">🐸</span>
+                        <span class="user-name">Александр</span>
+                        <i data-feather="chevron-down"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard/home page -->
+            <section id="dashboard" class="page-section active">
+                <div class="dashboard-grid">
+                    <div class="card welcome-card">
+                        <div class="welcome-top">
+                            <div class="welcome-badge">🐸 Froject</div>
+                            <div class="welcome-title">Единое пространство для координации команды</div>
+                            <div class="welcome-sub">Задачи, календарь, чат и прогресс — чтобы меньше времени уходило на организацию и больше задач сдавалось в срок.</div>
+                        </div>
+                        <div class="welcome-stats">
+                            <div class="mini-kpi"><div class="k">В срок</div><div class="v">86%</div></div>
+                            <div class="mini-kpi"><div class="k">Планирование</div><div class="v">‑28%</div></div>
+                            <div class="mini-kpi"><div class="k">Скорость</div><div class="v">19 задач/нед</div></div>
+                            <div class="mini-kpi"><div class="k">Фокус</div><div class="v">6ч</div></div>
+                        </div>
+                        <div class="welcome-actions">
+                            <button class="btn btn-primary" data-section-jump="calendar"><i data-feather="calendar"></i> Открыть календарь</button>
+                            <button class="btn btn-ghost" data-section-jump="tasks"><i data-feather="check-square"></i> Перейти к задачам</button>
+                        </div>
+                    </div>
+
+                    <div class="widgets">
+                    <div class="widget tasks-summary">
+                        <div class="widget-header">
+                            <i data-feather="check-circle"></i>
+                            <h3>Задачи</h3>
+                        </div>
+                        <p class="widget-value" id="tasks-count">0</p>
+                        <p class="widget-subtext">всего задач</p>
+                    </div>
+                    <div class="widget calendar-summary">
+                        <div class="widget-header">
+                            <i data-feather="calendar"></i>
+                            <h3>Сегодня</h3>
+                        </div>
+                        <p class="widget-value" id="today-date"></p>
+                        <p class="widget-subtext" id="today-weekday"></p>
+                    </div>
+                    <div class="widget projects-summary">
+                        <div class="widget-header">
+                            <i data-feather="folder"></i>
+                            <h3>Проекты</h3>
+                        </div>
+                        <p class="widget-value" id="projects-count">0</p>
+                        <p class="widget-subtext">активных</p>
+                    </div>
+                        <div class="widget me-summary">
+                            <div class="widget-header">
+                                <i data-feather="user"></i>
+                                <h3>Моя статистика</h3>
+                            </div>
+                            <div class="me-lines">
+                                <div class="me-line"><span class="muted">Закрыто задач</span><span class="strong">42</span></div>
+                                <div class="me-line"><span class="muted">Среднее время</span><span class="strong">1.8 дня</span></div>
+                                <div class="me-line"><span class="muted">Риск дедлайнов</span><span class="strong">низкий</span></div>
+                            </div>
+                        </div>
+
+                        <div class="widget about-summary">
+                            <div class="widget-header">
+                                <i data-feather="sparkles"></i>
+                                <h3>О Froject</h3>
+                            </div>
+                            <p class="about-lead">Froject — умный трекер, который автоматизирует координацию команды: задачи, календарь, чат и прогресс в одном месте.</p>
+                            <div class="about-tags">
+                                <span class="tag chip-primary">🐸 Smart Scheduling</span>
+                                <span class="tag">Гант</span>
+                                <span class="tag">Автодедлайны</span>
+                            </div>
+                            <div class="about-metrics">
+                                <div class="about-metric"><div class="muted">Фокус на времени</div><div class="strong">−25% координации</div></div>
+                                <div class="about-metric"><div class="muted">В срок</div><div class="strong">+18% задач</div></div>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+            </section>
+
+            <!-- Calendar page -->
+                        <section id="calendar" class="page-section">
+                <div class="page-head">
+                    <div>
+                        <h2>Календарь команды</h2>
+                        <p class="muted">Встречи, дедлайны и автозадачи — всё в одном месте.</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="btn btn-ghost" id="prev-week" title="Предыдущая неделя"><i data-feather="chevron-left"></i></button>
+                        <div class="pill" id="week-range">Неделя • 09–15 декабря</div>
+                        <button class="btn btn-ghost" id="next-week" title="Следующая неделя"><i data-feather="chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="calendar-split">
+                    <div class="card calendar-card">
+                        <div class="calendar-grid" id="week-grid">
+                            <!-- grid built by JS -->
+                        </div>
+                        <div class="calendar-legend">
+                            <span class="legend-item"><span class="dot dot-meeting"></span>Встречи</span>
+                            <span class="legend-item"><span class="dot dot-deadline"></span>Дедлайны</span>
+                            <span class="legend-item"><span class="dot dot-focus"></span>Фокус‑слот</span>
+                            <span class="legend-item"><span class="dot dot-personal"></span>Личное</span>
+                        </div>
+                    </div>
+
+                    <div class="right-rail">
+                        <div class="card smart-card">
+                            <div class="card-head">
+                                <div class="card-title">
+                                    <span class="badge badge-frog">🐸 Smart Scheduling</span>
+                                    <h3>Подобрать встречу</h3>
+                                </div>
+                                <button class="btn btn-primary" id="suggest-meeting"><i data-feather="zap"></i> Предложить</button>
+                            </div>
+                            <div class="smart-body">
+                                <div class="smart-row">
+                                    <span class="muted">Цель</span>
+                                    <span class="strong">Синк по спринту</span>
+                                </div>
+                                <div class="smart-row">
+                                    <span class="muted">Участники</span>
+                                    <span class="chips">
+                                        <span class="chip">Саша</span>
+                                        <span class="chip">Наташа</span>
+                                        <span class="chip">Ася</span>
+                                        <span class="chip">Даня</span>
+                                    </span>
+                                </div>
+                                <div class="smart-row">
+                                    <span class="muted">Рекомендуемое окно</span>
+                                    <span class="strong" id="meeting-slot">Чт • 12:30–13:00</span>
+                                </div>
+                                <p class="hint">Алгоритм учитывает занятость и дедлайны, чтобы не ломать фокус‑время.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-head compact">
+                                <h3>Автозадачи и дедлайны</h3>
+                                <span class="muted">на этой неделе</span>
+                            </div>
+                            <div class="auto-list" id="auto-list">
+                                <!-- filled by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tasks page -->
+                        <section id="tasks" class="page-section">
+                <div class="page-head">
+                    <div>
+                        <h2>Мои задачи</h2>
+                        <p class="muted">Сроки, статусы и прогресс — чтобы было видно, что “движется”.</p>
+                    </div>
+                    <div class="page-actions">
+                        <div class="pill"><i data-feather="activity"></i> В срок: <span class="strong" id="on-time">—</span></div>
+                        <button class="btn btn-primary" id="add-demo-task"><i data-feather="plus"></i> Быстро добавить</button>
+                    </div>
+                </div>
+
+                <div class="tasks-layout">
+                    <aside class="card filters">
+                        <h3>Фильтры</h3>
+                        <div class="filter-group">
+                            <span class="label">Проект</span>
+                            <div class="chips">
+                                <button class="chip chip-active" data-filter="all">Все</button>
+                                <button class="chip" data-filter="froject">Froject</button>
+                                <button class="chip" data-filter="demo">Демо</button>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <span class="label">Статус</span>
+                            <div class="chips">
+                                <button class="chip chip-active" data-status="all">Любой</button>
+                                <button class="chip" data-status="inprogress">В работе</button>
+                                <button class="chip" data-status="review">На ревью</button>
+                                <button class="chip" data-status="done">Готово</button>
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="tip-ico">🐸</div>
+                            <div>
+                                <div class="strong">Фокус‑рекомендация</div>
+                                <div class="muted">Сделай 1 “важную” задачу до обеда — и день уже победил.</div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <div class="card tasks-card">
+                        <div class="tasks-toolbar">
+                            <div class="search">
+                                <i data-feather="search"></i>
+                                <input id="task-search" type="text" placeholder="Поиск по задачам..." autocomplete="off">
+                            </div>
+                            <div class="segmented">
+                                <button class="seg active" data-view="list">Список</button>
+                                <button class="seg" data-view="kanban">Канбан</button>
+                            </div>
+                        </div>
+
+                        <div id="tasks-view">
+                            <!-- filled by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects page -->
+            <section id="projects" class="page-section">
+                <h2>Проекты</h2>
+                <p class="muted">Создайте проект и откройте его рабочее пространство: задачи, календарь, участники, чат и визуализация прогресса.</p>
+                <div class="project-form">
+                    <input type="text" id="project-name" placeholder="Название проекта" autocomplete="off">
+                    <input type="date" id="project-deadline">
+                    <button id="add-project">Создать</button>
+                </div>
+                <div class="project-list" id="project-list">
+                    <!-- Project cards created dynamically -->
+                </div>
+            </section>
+
+            <!-- Messenger page -->
+                        <section id="chat" class="page-section">
+                <div class="page-head">
+                    <div>
+                        <h2>Сообщения</h2>
+                        <p class="muted">Мини‑мессенджер: рабочие чаты и личные — для демонстрации интерфейса.</p>
+                    </div>
+                    <div class="page-actions">
+                        <div class="pill"><span class="dot dot-online"></span> online</div>
+                    </div>
+                </div>
+
+                <div class="messenger card">
+                    <aside class="chat-list">
+                        <div class="chat-search">
+                            <i data-feather="search"></i>
+                            <input id="chat-search" type="text" placeholder="Поиск..." autocomplete="off">
+                        </div>
+
+                        <div class="chat-groups">
+                            <div class="chat-group-title">Рабочие</div>
+                            <div class="chat-item active" data-chat="work-1">
+                                <div class="chat-avatar frog">🐸</div>
+                                <div class="chat-meta">
+                                    <div class="chat-top">
+                                        <span class="chat-name">Froject • Команда</span>
+                                        <span class="chat-time">12:14</span>
+                                    </div>
+                                    <div class="chat-preview">Слот нашёлся: четверг 12:30 ✅</div>
+                                </div>
+                                <span class="unread">2</span>
+                            </div>
+
+                            <div class="chat-item" data-chat="work-2">
+                                <div class="chat-avatar">UI</div>
+                                <div class="chat-meta">
+                                    <div class="chat-top">
+                                        <span class="chat-name">Дизайн‑синк</span>
+                                        <span class="chat-time">вчера</span>
+                                    </div>
+                                    <div class="chat-preview">Давайте сделаем зелёный градиент мягче</div>
+                                </div>
+                            </div>
+
+                            <div class="chat-group-title">Коллеги</div>
+                            <div class="chat-item" data-chat="col-1">
+                                <div class="chat-avatar">1</div>
+                                <div class="chat-meta">
+                                    <div class="chat-top">
+                                        <span class="chat-name">Коллега №1</span>
+                                        <span class="chat-time">09:01</span>
+                                    </div>
+                                    <div class="chat-preview">Скину PR через 15 минут</div>
+                                </div>
+                            </div>
+
+                            <div class="chat-item" data-chat="col-2">
+                                <div class="chat-avatar">2</div>
+                                <div class="chat-meta">
+                                    <div class="chat-top">
+                                        <span class="chat-name">Коллега №2</span>
+                                        <span class="chat-time">пн</span>
+                                    </div>
+                                    <div class="chat-preview">Напомни, когда дедлайн по MVP?</div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <div class="chat-panel">
+                        <div class="chat-panel-head">
+                            <div class="chat-panel-title">
+                                <div class="chat-avatar frog" id="active-chat-avatar">🐸</div>
+                                <div>
+                                    <div class="strong" id="active-chat-name">Froject • Команда</div>
+                                    <div class="muted" id="active-chat-sub">4 участника • быстрый синк</div>
+                                </div>
+                            </div>
+                            <div class="chat-panel-actions">
+                                <button class="icon-btn" title="Поиск"><i data-feather="search"></i></button>
+                                <button class="icon-btn" title="Инфо"><i data-feather="info"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="chat-messages" id="chat-messages"></div>
+
+                        <div class="chat-compose">
+                            <button class="icon-btn" title="Прикрепить"><i data-feather="paperclip"></i></button>
+                            <input id="chat-input" type="text" placeholder="Написать сообщение..." autocomplete="off">
+                            <button class="btn btn-primary" id="send-message"><i data-feather="send"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support page (NOT messenger; ticket-style contact to support) -->
+            <section id="support" class="page-section">
+                <div class="page-head">
+                    <div>
+                        <h2>Поддержка</h2>
+                        <p class="muted">Оставьте обращение — статус и история будут здесь (демо‑макет).</p>
+                    </div>
+                    <div class="page-actions">
+                        <div class="pill"><span class="dot dot-online"></span> обычно отвечаем за 5–15 мин</div>
+                    </div>
+                </div>
+
+                <div class="support-layout">
+                    <aside class="card support-left">
+                        <div class="support-kb">
+                            <div class="strong">Быстрые темы</div>
+                            <button class="kb-item"><span>🐸</span> Не работает Smart Scheduling</button>
+                            <button class="kb-item"><span>📅</span> Календарь / дедлайны</button>
+                            <button class="kb-item"><span>✅</span> Задачи и статусы</button>
+                            <button class="kb-item"><span>🔐</span> Доступы и конфиденциальность</button>
+                        </div>
+
+                        <div class="support-ticket">
+                            <div class="ticket-top">
+                                <div>
+                                    <div class="strong">Тикет #1042</div>
+                                    <div class="muted">Статус: <span class="tag green">Открыт</span></div>
+                                </div>
+                                <span class="tag">Froject</span>
+                            </div>
+                            <div class="ticket-meta">
+                                <div class="muted">Тема</div>
+                                <div class="strong">Календарь не показывает дедлайны</div>
+                                <div class="muted" style="margin-top:8px">Приоритет</div>
+                                <div class="strong">Средний</div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <div class="card support-chat">
+                        <div class="support-chat-head">
+                            <div>
+                                <div class="strong">Чат с поддержкой</div>
+                                <div class="muted">Ответит бот или оператор (демо)</div>
+                            </div>
+                            <span class="badge badge-frog">🐸 Froject Care</span>
+                        </div>
+
+                        <div class="support-thread" id="support-thread"></div>
+
+                        <form id="support-form" class="support-compose">
+                            <input type="text" id="support-subject" placeholder="Коротко: тема обращения" autocomplete="off" required>
+                            <input type="text" id="support-message" placeholder="Опишите проблему…" autocomplete="off" required>
+                            <button class="btn btn-primary" type="submit"><i data-feather="send"></i> Отправить</button>
+                        </form>
+                        <div class="hint" style="margin-top:10px">Это макет: сообщения добавляются визуально, без отправки на сервер.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings page -->
+            <section id="settings" class="page-section">
+                <div class="page-head">
+                    <div>
+                        <h2>Настройки</h2>
+                        <p class="muted">Коротко и понятно: тема, конфиденциальность, уведомления (демо).</p>
+                    </div>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Внешний вид</h3>
+                            <span class="muted">frog‑theme</span>
+                        </div>
+                        <div class="setting-row">
+                            <div>
+                                <div class="strong">Тема</div>
+                                <div class="muted">Светлая / тёмная (в макете — тёмная)</div>
+                            </div>
+                            <select id="theme-select" class="select">
+                                <option value="dark" selected>Тёмная</option>
+                                <option value="light">Светлая</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <div>
+                                <div class="strong">Акцент</div>
+                                <div class="muted">Мягкий зелёный + индиго</div>
+                            </div>
+                            <div class="chips">
+                                <span class="chip chip-active">🐸 Mint</span>
+                                <span class="chip">Indigo</span>
+                                <span class="chip">Amber</span>
+                            </div>
+                        </div>
+                        <div class="setting-row">
+                            <div>
+                                <div class="strong">Компактный режим</div>
+                                <div class="muted">Уменьшает отступы</div>
+                            </div>
+                            <label class="toggle"><input type="checkbox" id="compact-toggle"><span></span></label>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Конфиденциальность</h3>
+                            <span class="muted">в будущем</span>
+                        </div>
+                        <div class="setting-row">
+                            <div>
+                                <div class="strong">Видимость профиля</div>
+                                <div class="muted">Кто видит ваши задачи и статус</div>
+                            </div>
+                            <div class="chips">
+                                <span class="chip chip-active">Команда</span>
+                                <span class="chip">Только я</span>
+                            </div>
+                        </div>
+                        <div class="setting-row">
+                            <div>
+                                <div class="strong">Личные события</div>
+                                <div class="muted">Скрывать детали в календаре</div>
+                            </div>
+                            <label class="toggle"><input type="checkbox" checked><span></span></label>
+                        </div>
+                        <div class="setting-row">
+                            <div>
+                                <div class="strong">Язык</div>
+                                <div class="muted">Пока как идея на будущее</div>
+                            </div>
+                            <select class="select" disabled>
+                                <option selected>Русский</option>
+                                <option>English</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Уведомления</h3>
+                            <span class="muted">демо</span>
+                        </div>
+                        <div class="setting-row">
+                            <div>
+                                <div class="strong">Дедлайны</div>
+                                <div class="muted">Напоминать за 24 часа</div>
+                            </div>
+                            <label class="toggle"><input type="checkbox" checked><span></span></label>
+                        </div>
+                        <div class="setting-row">
+                            <div>
+                                <div class="strong">Встречи</div>
+                                <div class="muted">Напоминать за 10 минут</div>
+                            </div>
+                            <label class="toggle"><input type="checkbox" checked><span></span></label>
+                        </div>
+                        <div class="setting-row">
+                            <div>
+                                <div class="strong">Рекомендации 🐸</div>
+                                <div class="muted">Подсказывать “лучшее окно”</div>
+                            </div>
+                            <label class="toggle"><input type="checkbox" checked><span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile is now an icon (top-right) that opens a modal -->
+
+            <!-- Project workspace modal (mock) -->
+            <div class="modal" id="workspace-modal" aria-hidden="true">
+                <div class="modal-backdrop" data-close="true"></div>
+                <div class="modal-dialog" role="dialog" aria-modal="true" aria-label="Рабочее пространство проекта">
+                    <div class="modal-header">
+                        <div class="modal-title">
+                            <div class="title-row">
+                                <h2 id="ws-project-name">Проект</h2>
+                                <span class="chip chip-primary" id="ws-project-status">Активен</span>
+                            </div>
+                            <div class="subtitle-row">
+                                <span class="chip"><i data-feather="sparkles"></i> Smart Scheduling</span>
+                                <span class="muted" id="ws-next-meeting">Ближайшая встреча: —</span>
+                            </div>
+                        </div>
+                        <button class="icon-btn" id="ws-close" aria-label="Закрыть"><i data-feather="x"></i></button>
+                    </div>
+
+                    <div class="ws-tabs" role="tablist" aria-label="Разделы проекта">
+                        <button class="ws-tab active" data-ws-tab="ws-overview" role="tab">Главная</button>
+                        <button class="ws-tab" data-ws-tab="ws-calendar" role="tab">Календарь</button>
+                        <button class="ws-tab" data-ws-tab="ws-tasks" role="tab">Задачи</button>
+                        <button class="ws-tab" data-ws-tab="ws-members" role="tab">Участники</button>
+                        <button class="ws-tab" data-ws-tab="ws-chat" role="tab">Чат</button>
+                    </div>
+
+                    <div class="ws-body">
+                        <!-- Overview -->
+                        <section id="ws-overview" class="ws-section active" role="tabpanel">
+                            <div class="ws-grid">
+                                <div class="card">
+                                    <div class="card-head">
+                                        <h3>Прогресс команды</h3>
+                                        <span class="muted">по задачам и дедлайнам</span>
+                                    </div>
+                                    <div class="kpi-row">
+                                        <div class="kpi">
+                                            <div class="kpi-label">Задачи вовремя</div>
+                                            <div class="kpi-value" id="ws-kpi-ontime">82%</div>
+                                        </div>
+                                        <div class="kpi">
+                                            <div class="kpi-label">Время планирования</div>
+                                            <div class="kpi-value" id="ws-kpi-planning">−35%</div>
+                                        </div>
+                                        <div class="kpi">
+                                            <div class="kpi-label">Загруженность</div>
+                                            <div class="kpi-value" id="ws-kpi-load">средняя</div>
+                                        </div>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="progress-legend">
+                                        <span class="chip chip-green">Готово</span>
+                                        <span class="chip chip-amber">В работе</span>
+                                        <span class="chip chip-gray">Запланировано</span>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-head">
+                                        <h3>Диаграмма Ганта (макет)</h3>
+                                        <span class="muted">статус, исполнитель, прогресс</span>
+                                    </div>
+                                    <div class="gantt">
+                                        <div class="gantt-head">
+                                            <div class="gantt-col task">Задача</div>
+                                            <div class="gantt-col owner">Исп.</div>
+                                            <div class="gantt-col bar">Таймлайн</div>
+                                        </div>
+                                        <div class="gantt-row">
+                                            <div class="gantt-col task">
+                                                <div class="task-title">Дизайн интерфейса</div>
+                                                <div class="task-meta"><span class="chip chip-green">Готово</span></div>
+                                            </div>
+                                            <div class="gantt-col owner"><span class="avatar-mini">Н</span></div>
+                                            <div class="gantt-col bar">
+                                                <div class="bar-track">
+                                                    <div class="bar-fill done" style="left: 8%; width: 28%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="gantt-row">
+                                            <div class="gantt-col task">
+                                                <div class="task-title">MVP: задачи + календарь</div>
+                                                <div class="task-meta"><span class="chip chip-amber">В работе</span></div>
+                                            </div>
+                                            <div class="gantt-col owner"><span class="avatar-mini">С</span></div>
+                                            <div class="gantt-col bar">
+                                                <div class="bar-track">
+                                                    <div class="bar-fill doing" style="left: 28%; width: 42%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="gantt-row">
+                                            <div class="gantt-col task">
+                                                <div class="task-title">Smart Scheduling</div>
+                                                <div class="task-meta"><span class="chip chip-gray">Запланировано</span></div>
+                                            </div>
+                                            <div class="gantt-col owner"><span class="avatar-mini">А</span></div>
+                                            <div class="gantt-col bar">
+                                                <div class="bar-track">
+                                                    <div class="bar-fill planned" style="left: 58%; width: 34%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Calendar -->
+                        <section id="ws-calendar" class="ws-section" role="tabpanel">
+                            <div class="card">
+                                <div class="card-head">
+                                    <h3>Командный календарь (неделя)</h3>
+                                    <span class="muted">встречи + дедлайны</span>
+                                </div>
+                                <div class="week">
+                                    <div class="week-grid">
+                                        <div class="week-col">
+                                            <div class="week-day">Пн</div>
+                                            <div class="slot busy">11:00 созвон</div>
+                                            <div class="slot free">13:00 свободно</div>
+                                            <div class="slot busy">16:00 дедлайн</div>
+                                        </div>
+                                        <div class="week-col">
+                                            <div class="week-day">Вт</div>
+                                            <div class="slot free">11:00 свободно</div>
+                                            <div class="slot busy">13:00 встреча</div>
+                                            <div class="slot free">16:00 свободно</div>
+                                        </div>
+                                        <div class="week-col">
+                                            <div class="week-day">Ср</div>
+                                            <div class="slot free">11:00 свободно</div>
+                                            <div class="slot free">13:00 свободно</div>
+                                            <div class="slot busy">16:00 ревью</div>
+                                        </div>
+                                        <div class="week-col">
+                                            <div class="week-day">Чт</div>
+                                            <div class="slot busy">11:00 стендап</div>
+                                            <div class="slot free">13:00 свободно</div>
+                                            <div class="slot free">16:00 свободно</div>
+                                        </div>
+                                        <div class="week-col">
+                                            <div class="week-day">Пт</div>
+                                            <div class="slot free">11:00 свободно</div>
+                                            <div class="slot busy">13:00 презентация</div>
+                                            <div class="slot free">16:00 свободно</div>
+                                        </div>
+                                    </div>
+                                    <div class="hint">
+                                        <i data-feather="sparkles"></i>
+                                        <span>Smart Scheduling предлагает «окна» без конфликтов и ставит дедлайны прямо в календарь.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Tasks -->
+                        <section id="ws-tasks" class="ws-section" role="tabpanel">
+                            <div class="ws-grid">
+                                <div class="card">
+                                    <div class="card-head">
+                                        <h3>Список задач</h3>
+                                        <span class="muted">как в To‑Do, но с людьми и временем</span>
+                                    </div>
+                                    <ul class="ws-tasklist">
+                                        <li>
+                                            <span class="status-dot done"></span>
+                                            <div class="ws-task-main">
+                                                <div class="ws-task-title">Собрать требования и метрики</div>
+                                                <div class="ws-task-sub"><span class="chip chip-green">Готово</span> · Исп.: Наташа · Дедлайн: 19 дек</div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <span class="status-dot doing"></span>
+                                            <div class="ws-task-main">
+                                                <div class="ws-task-title">Сверстать макет проекта</div>
+                                                <div class="ws-task-sub"><span class="chip chip-amber">В работе</span> · Исп.: Саня · Дедлайн: 21 дек</div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <span class="status-dot planned"></span>
+                                            <div class="ws-task-main">
+                                                <div class="ws-task-title">Автоподбор времени встречи</div>
+                                                <div class="ws-task-sub"><span class="chip chip-gray">Запланировано</span> · Исп.: Ася · Дедлайн: 24 дек</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card">
+                                    <div class="card-head">
+                                        <h3>Кому назначить задачу</h3>
+                                        <span class="muted">видно занятость и риск дедлайнов</span>
+                                    </div>
+                                    <div class="members-mini">
+                                        <div class="member-mini">
+                                            <div class="avatar-mini">Н</div>
+                                            <div class="member-meta">
+                                                <div class="member-name">Наташа</div>
+                                                <div class="member-sub">загрузка 60% · дедлайны ок</div>
+                                            </div>
+                                            <span class="chip chip-green">можно</span>
+                                        </div>
+                                        <div class="member-mini">
+                                            <div class="avatar-mini">С</div>
+                                            <div class="member-meta">
+                                                <div class="member-name">Саня</div>
+                                                <div class="member-sub">загрузка 85% · риск 1 дедлайна</div>
+                                            </div>
+                                            <span class="chip chip-amber">осторожно</span>
+                                        </div>
+                                        <div class="member-mini">
+                                            <div class="avatar-mini">А</div>
+                                            <div class="member-meta">
+                                                <div class="member-name">Ася</div>
+                                                <div class="member-sub">загрузка 45% · есть окно</div>
+                                            </div>
+                                            <span class="chip chip-green">можно</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Members -->
+                        <section id="ws-members" class="ws-section" role="tabpanel">
+                            <div class="card">
+                                <div class="card-head">
+                                    <h3>Участники</h3>
+                                    <span class="muted">роль, задачи, статус</span>
+                                </div>
+                                <div class="members-grid">
+                                    <div class="member-card">
+                                        <div class="member-top"><span class="avatar-mini">Н</span><div><div class="member-name">Наташа</div><div class="member-sub">PM</div></div></div>
+                                        <div class="member-stats"><span class="chip chip-green">2 готово</span><span class="chip chip-amber">1 в работе</span></div>
+                                    </div>
+                                    <div class="member-card">
+                                        <div class="member-top"><span class="avatar-mini">С</span><div><div class="member-name">Саня</div><div class="member-sub">Frontend</div></div></div>
+                                        <div class="member-stats"><span class="chip chip-amber">2 в работе</span><span class="chip chip-gray">1 заплан.</span></div>
+                                    </div>
+                                    <div class="member-card">
+                                        <div class="member-top"><span class="avatar-mini">А</span><div><div class="member-name">Ася</div><div class="member-sub">Analytics</div></div></div>
+                                        <div class="member-stats"><span class="chip chip-green">1 готово</span><span class="chip chip-gray">2 заплан.</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Chat -->
+                        <section id="ws-chat" class="ws-section" role="tabpanel">
+                            <div class="card">
+                                <div class="card-head">
+                                    <h3>Чат проекта</h3>
+                                    <span class="muted">всё обсуждение рядом с задачами</span>
+                                </div>
+                                <div class="ws-chat">
+                                    <div class="ws-msg bot">Я вижу окно для встречи в среду 13:00 — без конфликтов у всех участников.</div>
+                                    <div class="ws-msg user">Супер, давайте поставим!</div>
+                                    <div class="ws-msg bot">Готово: встреча добавлена, дедлайны обновлены в календаре и Ганте.</div>
+                                </div>
+                                <div class="ws-chat-input">
+                                    <input type="text" placeholder="Написать сообщение…" disabled>
+                                    <button class="btn" disabled>Отправить</button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile modal (from top-right icon) -->
+            <div class="modal" id="profile-modal" aria-hidden="true">
+                <div class="modal-backdrop" data-close-profile="true"></div>
+                <div class="modal-dialog" role="dialog" aria-modal="true" aria-label="Профиль">
+                    <div class="modal-header">
+                        <div class="modal-title">
+                            <div class="title-row">
+                                <h2>Профиль</h2>
+                                <span class="badge badge-frog">🐸 Froject ID</span>
+                            </div>
+                            <div class="subtitle-row">
+                                <span class="muted">Пара слов о себе + базовые настройки аккаунта (демо).</span>
+                            </div>
+                        </div>
+                        <button class="icon-btn" id="profile-close" aria-label="Закрыть"><i data-feather="x"></i></button>
+                    </div>
+
+                    <div class="ws-tabs" role="tablist" aria-label="Профиль">
+                        <button class="ws-tab active" data-prof-tab="prof-main" role="tab">Профиль</button>
+                        <button class="ws-tab" data-prof-tab="prof-privacy" role="tab">Конфиденциальность</button>
+                        <button class="ws-tab" data-prof-tab="prof-account" role="tab">Аккаунт</button>
+                    </div>
+
+                    <div class="ws-body">
+                        <section id="prof-main" class="ws-section active" role="tabpanel">
+                            <div class="profile-grid">
+                                <div class="card profile-card">
+                                    <div class="profile-hero">
+                                        <div class="profile-avatar big">🐸</div>
+                                        <div>
+                                            <div class="profile-name">Александр</div>
+                                            <div class="profile-about">Frontend • делаю “вау‑макеты” • люблю чистый UI и понятную координацию.</div>
+                                            <div class="chips">
+                                                <span class="chip">Froject</span>
+                                                <span class="chip">UI</span>
+                                                <span class="chip">MVP</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-fields">
+                                        <div class="field"><span class="label">Имя</span><span class="value">Александр</span></div>
+                                        <div class="field"><span class="label">Роль</span><span class="value">Тимлид проекта</span></div>
+                                        <div class="field"><span class="label">Почта</span><span class="value">arkelansasa@gmail.com</span></div>
+                                        <div class="field"><span class="label">Команда</span><span class="value">Froject • 4 участника</span></div>
+                                    </div>
+
+                                    <div class="profile-cta">
+                                        <button class="btn btn-primary"><i data-feather="camera"></i> Изменить аватар</button>
+                                        <button class="btn btn-ghost"><i data-feather="edit-3"></i> Редактировать</button>
+                                    </div>
+                                </div>
+
+                                <div class="stack">
+                                    <div class="card">
+                                        <div class="card-head compact">
+                                            <h3>Загруженность</h3>
+                                            <span class="muted">на этой неделе</span>
+                                        </div>
+                                        <div class="mini-bars">
+                                            <div class="bar-row"><span>Фокус</span><div class="bar"><span style="width:66%"></span></div><span class="muted">6ч</span></div>
+                                            <div class="bar-row"><span>Встречи</span><div class="bar"><span style="width:38%"></span></div><span class="muted">3ч</span></div>
+                                            <div class="bar-row"><span>Учёба</span><div class="bar"><span style="width:22%"></span></div><span class="muted">2ч</span></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-head compact">
+                                            <h3>Демо‑метрики</h3>
+                                            <span class="muted">для защиты</span>
+                                        </div>
+                                        <div class="kpi-grid">
+                                            <div class="kpi"><div class="kpi-label">В срок</div><div class="kpi-value">86%</div></div>
+                                            <div class="kpi"><div class="kpi-label">Планирование</div><div class="kpi-value">‑28%</div></div>
+                                            <div class="kpi"><div class="kpi-label">Задач/нед</div><div class="kpi-value">19</div></div>
+                                            <div class="kpi"><div class="kpi-label">Риск</div><div class="kpi-value">низкий</div></div>
+                                        </div>
+                                        <p class="hint">Показывает идею: меньше времени на координацию — больше задач в срок.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="prof-privacy" class="ws-section" role="tabpanel">
+                            <div class="settings-grid" style="grid-template-columns: 1fr 1fr;">
+                                <div class="card">
+                                    <div class="card-head"><h3>Видимость</h3><span class="muted">демо</span></div>
+                                    <div class="setting-row"><div><div class="strong">Статус и прогресс</div><div class="muted">Кто видит ваши проценты и дедлайны</div></div><div class="chips"><span class="chip chip-active">Команда</span><span class="chip">Только я</span></div></div>
+                                    <div class="setting-row"><div><div class="strong">Личные события</div><div class="muted">Скрывать детали в календаре</div></div><label class="toggle"><input type="checkbox" checked><span></span></label></div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-head"><h3>Доступы</h3><span class="muted">демо</span></div>
+                                    <div class="setting-row"><div><div class="strong">Приглашения</div><div class="muted">Кто может добавлять в проекты</div></div><div class="chips"><span class="chip chip-active">По ссылке</span><span class="chip">Только админ</span></div></div>
+                                    <div class="setting-row"><div><div class="strong">Экспорт данных</div><div class="muted">Скачать отчёт по задачам</div></div><button class="btn btn-ghost"><i data-feather="download"></i> Экспорт</button></div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="prof-account" class="ws-section" role="tabpanel">
+                            <div class="settings-grid" style="grid-template-columns: 1fr 1fr;">
+                                <div class="card">
+                                    <div class="card-head"><h3>Аккаунт</h3><span class="muted">демо</span></div>
+                                    <div class="setting-row"><div><div class="strong">Email</div><div class="muted">arkelansasa@gmail.com</div></div><button class="btn btn-ghost"><i data-feather="edit-3"></i> Изменить</button></div>
+                                    <div class="setting-row"><div><div class="strong">Пароль</div><div class="muted">Последнее изменение: 2 недели назад</div></div><button class="btn btn-ghost"><i data-feather="key"></i> Обновить</button></div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-head"><h3>Действия</h3><span class="muted">демо</span></div>
+                                    <div class="setting-row"><div><div class="strong">Выйти</div><div class="muted">Завершить сессию</div></div><button class="btn btn-ghost danger"><i data-feather="log-out"></i> Выйти</button></div>
+                                    <div class="setting-row"><div><div class="strong">Удалить аккаунт</div><div class="muted">Необратимо (макет)</div></div><button class="btn btn-ghost danger"><i data-feather="trash-2"></i> Удалить</button></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Project Workspace (demo modal) -->
+    <div class="modal" id="workspace-modal" aria-hidden="true">
+        <div class="modal-backdrop" data-close="workspace-modal"></div>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="workspace-title">
+            <header class="modal-header">
+                <div>
+                    <div class="modal-kicker">Рабочее пространство проекта</div>
+                    <h2 id="workspace-title" class="modal-title">Froject</h2>
+                    <div class="modal-subtitle" id="workspace-subtitle">Задачи • Календарь • Участники • Чат • Гант</div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" id="demo-smart" type="button"><i data-feather="sparkles"></i><span>Smart Scheduling</span></button>
+                    <button class="icon-btn" type="button" data-close="workspace-modal" aria-label="Закрыть"><i data-feather="x"></i></button>
+                </div>
+            </header>
+
+            <nav class="tabs" aria-label="Навигация проекта">
+                <button class="tab active" data-wtab="overview"><i data-feather="activity"></i><span>Главная</span></button>
+                <button class="tab" data-wtab="wcalendar"><i data-feather="calendar"></i><span>Календарь</span></button>
+                <button class="tab" data-wtab="wtasks"><i data-feather="check-square"></i><span>Задачи</span></button>
+                <button class="tab" data-wtab="members"><i data-feather="users"></i><span>Участники</span></button>
+                <button class="tab" data-wtab="wchat"><i data-feather="message-circle"></i><span>Чат</span></button>
+            </nav>
+
+            <div class="modal-body">
+                <!-- Overview / Gantt -->
+                <section class="wtab active" id="wtab-overview">
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Прогресс проекта</h3>
+                                <span class="chip chip-info" id="workspace-deadline">Дедлайн: —</span>
+                            </div>
+                            <div class="kpis">
+                                <div class="kpi">
+                                    <div class="kpi-label">В срок</div>
+                                    <div class="kpi-value" id="kpi-ontime">82%</div>
+                                    <div class="kpi-hint">ключевая метрика эффективности</div>
+                                </div>
+                                <div class="kpi">
+                                    <div class="kpi-label">Время планирования</div>
+                                    <div class="kpi-value" id="kpi-planning">−34%</div>
+                                    <div class="kpi-hint">экономия времени команды</div>
+                                </div>
+                                <div class="kpi">
+                                    <div class="kpi-label">Нагрузка команды</div>
+                                    <div class="kpi-value" id="kpi-load">Средняя</div>
+                                    <div class="kpi-hint">видно, кто перегружен</div>
+                                </div>
+                            </div>
+                            <div class="progress-row">
+                                <div class="progress-bar big"><div class="progress" id="workspace-progress" style="width: 55%"></div></div>
+                                <div class="progress-meta"><span id="workspace-progress-text">55%</span> выполнено</div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Следующая встреча</h3>
+                                <span class="chip chip-success" id="smart-badge">подобрано автоматически</span>
+                            </div>
+                            <div class="meeting">
+                                <div class="meeting-time" id="meeting-time">Чт, 16:00–16:30</div>
+                                <div class="meeting-meta">Без конфликтов у 4/5 участников • онлайн</div>
+                                <div class="meeting-row">
+                                    <div class="avatar-stack" aria-label="Участники">
+                                        <span class="mini-avatar">А</span>
+                                        <span class="mini-avatar">Н</span>
+                                        <span class="mini-avatar">С</span>
+                                        <span class="mini-avatar">И</span>
+                                        <span class="mini-avatar ghost">+</span>
+                                    </div>
+                                    <button class="btn" type="button"><i data-feather="calendar"></i><span>Добавить в календарь</span></button>
+                                </div>
+                            </div>
+                            <div class="note">Froject координирует людей, а не только задачи: видно занятость, прогресс и риски дедлайнов.</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Диаграмма Ганта</h3>
+                            <span class="muted">статус, исполнитель и прогресс — прямо на таймлайне</span>
+                        </div>
+                        <div class="gantt">
+                            <div class="gantt-head">
+                                <div class="gantt-col task">Задачи</div>
+                                <div class="gantt-col timeline">
+                                    <div class="gantt-days">
+                                        <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gantt-row">
+                                <div class="gantt-task">
+                                    <div class="task-title">Собрать требования</div>
+                                    <div class="task-meta"><span class="chip chip-success">готово</span> • <span class="muted">Наташа</span></div>
+                                </div>
+                                <div class="gantt-timeline">
+                                    <div class="bar bar-done" style="left: 0%; width: 28%"><span>100%</span></div>
+                                </div>
+                            </div>
+                            <div class="gantt-row">
+                                <div class="gantt-task">
+                                    <div class="task-title">Дизайн интерфейса</div>
+                                    <div class="task-meta"><span class="chip chip-info">в работе</span> • <span class="muted">Ася</span></div>
+                                </div>
+                                <div class="gantt-timeline">
+                                    <div class="bar" style="left: 18%; width: 54%"><span>60%</span></div>
+                                </div>
+                            </div>
+                            <div class="gantt-row">
+                                <div class="gantt-task">
+                                    <div class="task-title">MVP + AI-логика</div>
+                                    <div class="task-meta"><span class="chip chip-warn">риск</span> • <span class="muted">Саня</span></div>
+                                </div>
+                                <div class="gantt-timeline">
+                                    <div class="bar bar-risk" style="left: 45%; width: 42%"><span>30%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Workspace calendar (week view mock) -->
+                <section class="wtab" id="wtab-wcalendar">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Командный календарь</h3>
+                            <span class="muted">встречи + дедлайны задач в одном месте</span>
+                        </div>
+                        <div class="week">
+                            <div class="week-grid">
+                                <div class="week-col">
+                                    <div class="week-day">Пн</div>
+                                    <div class="slot busy" style="top: 12%; height: 18%"><span>Созвон</span></div>
+                                </div>
+                                <div class="week-col">
+                                    <div class="week-day">Вт</div>
+                                    <div class="slot" style="top: 32%; height: 16%"><span>Демо</span></div>
+                                </div>
+                                <div class="week-col">
+                                    <div class="week-day">Ср</div>
+                                    <div class="slot busy" style="top: 22%; height: 22%"><span>Воркшоп</span></div>
+                                </div>
+                                <div class="week-col">
+                                    <div class="week-day">Чт</div>
+                                    <div class="slot highlight" style="top: 44%; height: 14%"><span>Встреча (Smart)</span></div>
+                                </div>
+                                <div class="week-col">
+                                    <div class="week-day">Пт</div>
+                                    <div class="slot" style="top: 60%; height: 12%"><span>Дедлайн</span></div>
+                                </div>
+                                <div class="week-col">
+                                    <div class="week-day">Сб</div>
+                                </div>
+                                <div class="week-col">
+                                    <div class="week-day">Вс</div>
+                                </div>
+                            </div>
+                            <div class="week-hours">
+                                <span>10:00</span><span>12:00</span><span>14:00</span><span>16:00</span><span>18:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Workspace tasks -->
+                <section class="wtab" id="wtab-wtasks">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Задачи проекта</h3>
+                            <div class="filters">
+                                <span class="chip">все</span>
+                                <span class="chip chip-info">в работе</span>
+                                <span class="chip chip-success">готово</span>
+                                <span class="chip chip-warn">риск</span>
+                            </div>
+                        </div>
+                        <div class="task-table">
+                            <div class="trow thead">
+                                <div>Задача</div>
+                                <div>Исполнитель</div>
+                                <div>Срок</div>
+                                <div>Статус</div>
+                            </div>
+                            <div class="trow">
+                                <div class="tmain">
+                                    <div class="task-title">Прототип экранов</div>
+                                    <div class="muted">UI + навигация</div>
+                                </div>
+                                <div><span class="pill"><span class="dot"></span>Ася</span></div>
+                                <div class="muted">Пт</div>
+                                <div><span class="chip chip-info">в работе</span></div>
+                            </div>
+                            <div class="trow">
+                                <div class="tmain">
+                                    <div class="task-title">Согласовать роли</div>
+                                    <div class="muted">кто за что отвечает</div>
+                                </div>
+                                <div><span class="pill"><span class="dot"></span>Наташа</span></div>
+                                <div class="muted">Ср</div>
+                                <div><span class="chip chip-success">готово</span></div>
+                            </div>
+                            <div class="trow">
+                                <div class="tmain">
+                                    <div class="task-title">Интеграция календарей</div>
+                                    <div class="muted">поиск окна для встречи</div>
+                                </div>
+                                <div><span class="pill"><span class="dot"></span>Саня</span></div>
+                                <div class="muted">Сб</div>
+                                <div><span class="chip chip-warn">риск</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Members -->
+                <section class="wtab" id="wtab-members">
+                    <div class="grid-3">
+                        <div class="member card">
+                            <div class="member-top">
+                                <div class="member-avatar">Н</div>
+                                <div>
+                                    <div class="member-name">Наташа</div>
+                                    <div class="muted">Product / Координация</div>
+                                </div>
+                            </div>
+                            <div class="member-metrics">
+                                <span class="chip chip-success">2 задачи в срок</span>
+                                <span class="chip">занятость: 65%</span>
+                            </div>
+                        </div>
+                        <div class="member card">
+                            <div class="member-top">
+                                <div class="member-avatar">А</div>
+                                <div>
+                                    <div class="member-name">Ася</div>
+                                    <div class="muted">Design</div>
+                                </div>
+                            </div>
+                            <div class="member-metrics">
+                                <span class="chip chip-info">1 задача в работе</span>
+                                <span class="chip">занятость: 72%</span>
+                            </div>
+                        </div>
+                        <div class="member card">
+                            <div class="member-top">
+                                <div class="member-avatar">С</div>
+                                <div>
+                                    <div class="member-name">Саня</div>
+                                    <div class="muted">Frontend / AI</div>
+                                </div>
+                            </div>
+                            <div class="member-metrics">
+                                <span class="chip chip-warn">1 задача с риском</span>
+                                <span class="chip">занятость: 85%</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Workspace chat -->
+                <section class="wtab" id="wtab-wchat">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Чат проекта</h3>
+                            <span class="muted">обсуждения прямо в проекте</span>
+                        </div>
+                        <div class="chat-window" id="workspace-chat">
+                            <div class="message bot">Собрал свободные окна — предлагаю встречу в четверг на 16:00.</div>
+                            <div class="message user">Ок, добавляй. И напомни про дедлайн дизайна.</div>
+                            <div class="message bot">Готово ✅ Дедлайн «Прототип экранов» в пятницу.</div>
+                        </div>
+                        <div class="chat-form" onsubmit="return false;">
+                            <input type="text" placeholder="Сообщение (демо)…" disabled>
+                            <button type="button" class="btn" disabled><span>Отправить</span></button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- Main script -->
+    <script src="js/script.js"></script>
+    <script>
+        // Replace icons on load
+        feather.replace();
+    </script>
+</body>
+</html>
