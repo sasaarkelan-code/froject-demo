@@ -1,0 +1,71 @@
+/* ---------- 1. Фон без полос ---------- */
+html, body {
+  min-height: 100vh;
+  background: fixed radial-gradient(900px 550px at 10% 10%, rgba(75, 227, 154, .22), transparent 60%),
+              fixed radial-gradient(900px 650px at 85% 15%, rgba(111, 124, 255, .18), transparent 60%),
+              fixed radial-gradient(850px 600px at 75% 85%, rgba(255, 107, 214, .12), transparent 55%),
+              fixed linear-gradient(160deg, #07130d, #0a1a12);
+}
+
+/* ---------- 2. Календарь: ровные ячейки ---------- */
+.calendar-grid {
+  grid-template-columns: 70px repeat(7, 1fr);
+  display: grid;
+}
+.cal-cell {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cal-slot {
+  position: relative;
+  min-height: 48px;
+}
+
+/* ---------- 3. Гант: выравнивание колонок ---------- */
+.gantt-head,
+.gantt-row {
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 12px;
+}
+.bar-track {
+  position: relative;
+  height: 10px;
+  background: rgba(255, 255, 255, .10);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar-fill {
+  position: absolute;
+  left: var(--left, 0);
+  width: var(--width, 0);
+  height: 100%;
+  border-radius: 999px;
+}
+
+/* ---------- 4. Убираем «текстовый» курсор ---------- */
+button, .icon-btn, .nav-item, .chip, .btn, .kb-item, .chat-item {
+  cursor: pointer;
+  user-select: none;
+}
+body {
+  cursor: default;
+}
+
+/* ---------- 5. Профиль: фикс «прыгающего» аватара ---------- */
+.profile-avatar.big {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
+.profile-fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
