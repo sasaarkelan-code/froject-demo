@@ -613,4 +613,22 @@ document.addEventListener("DOMContentLoaded", () => {
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
   }
-});
+
+  // ---------- Багофиксы ----------
+  document.documentElement.style.setProperty('--left', '0%');
+  document.documentElement.style.setProperty('--width', '0%');
+
+  // Фикс Гант: CSS-переменные вместо inline
+  document.querySelectorAll('.bar-fill').forEach(bar => {
+    const style = bar.style;
+    if (style.left)  bar.style.setProperty('--left',  style.left);
+    if (style.width) bar.style.setProperty('--width', style.width);
+    style.left = style.width = ''; // убираем inline
+  });
+
+  // Убираем текстовый курсор
+  document.addEventListener('selectstart', e => {
+    if (e.target.closest('input, textarea')) return;
+    e.preventDefault();
+  });
+}); // ← закрываем DOMContentLoaded
