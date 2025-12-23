@@ -1,6 +1,6 @@
 // Froject demo UI — mock interactions (no backend)
 document.addEventListener("DOMContentLoaded", () => {
-  // ---------- Device mode (desktop/mobile) ----------
+  // ---------- Device mode ----------
   const setDeviceMode = () => {
     const isMobile = window.matchMedia && window.matchMedia("(max-width: 860px)").matches;
     document.documentElement.dataset.device = isMobile ? "mobile" : "desktop";
@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
     sections.forEach((s) => s.classList.toggle("active", s.id === id));
     navItems.forEach((i) => i.classList.toggle("active", i.dataset.section === id));
     if (pageTitle) pageTitle.textContent = titles[id] || "Froject";
-    // re-render icons (new nodes)
     if (window.feather) feather.replace();
   }
 
@@ -57,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const meetingSlots = ["Чт • 12:30–13:00", "Ср • 17:00–17:30", "Пт • 10:30–11:00"];
 
-  // ---------- Dashboard metrics ----------
+  // ---------- Dashboard ----------
   updateDashboard();
 
   // ---------- Tasks ----------
@@ -103,7 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
       "Дальше": [],
     };
     const today = startOfDay(new Date());
-    const weekEnd = new Date(today); weekEnd.setDate(weekEnd.getDate() + 6);
+    const weekEnd = new Date(today);
+    weekEnd.setDate(weekEnd.getDate() + 6);
 
     tasks.forEach((t) => {
       const due = startOfDay(new Date(t.due));
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function taskCardInner(t, compact) {
-    const dueStr = new Date(t.due).toLocaleDateString("ru-RU", { day:"2-digit", month:"short" });
+    const dueStr = new Date(t.due).toLocaleDateString("ru-RU", { day: "2-digit", month: "short" });
     const statusLabel = t.status === "inprogress" ? "В работе" : t.status === "review" ? "Ревью" : "Готово";
     const statusClass = t.status;
     const progress = Math.max(0, Math.min(100, t.progress));
@@ -172,7 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         ${compact ? "" : `<button class="icon-btn" title="Открыть"><i data-feather="external-link"></i></button>`}
       </div>
-
       <div class="task-progress">
         <div class="row"><span>Прогресс</span><span>${progress}%</span></div>
         <div class="progress-bar"><div class="progress" style="width:${progress}%"></div></div>
@@ -180,7 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-  // View toggles
   segButtons.forEach((b) => b.addEventListener("click", () => {
     segButtons.forEach((x) => x.classList.toggle("active", x === b));
     currentView = b.dataset.view;
@@ -216,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderTasks();
 
-  // ---------- Calendar (week grid) ----------
+  // ---------- Calendar ----------
   const weekGrid = document.getElementById("week-grid");
   const weekRange = document.getElementById("week-range");
   const autoList = document.getElementById("auto-list");
@@ -252,9 +250,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderWeek() {
     if (!weekGrid) return;
 
-    const days = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
+    const days = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
     const startHour = 9;
-    const endHour = 18; // exclusive end label
+    const endHour = 18;
     const hours = [];
     for (let h = startHour; h < endHour; h++) hours.push(h);
 
@@ -264,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ].join("");
 
     const body = hours.map((h) => {
-      const timeLabel = `${String(h).padStart(2,"0")}:00`;
+      const timeLabel = `${String(h).padStart(2, "0")}:00`;
       const rowCells = days.map((_, dayIdx) => {
         return `<div class="cal-cell cal-slot" data-day="${dayIdx}" data-hour="${h}"></div>`;
       }).join("");
@@ -273,7 +271,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     weekGrid.innerHTML = headRow + body;
 
-    // Place events
     const slots = weekGrid.querySelectorAll(".cal-slot");
     slots.forEach((slot) => {
       const day = Number(slot.dataset.day);
@@ -294,9 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Week range label (mock)
     if (weekRange) weekRange.textContent = "Неделя • 09–15 декабря";
-
     if (window.feather) feather.replace();
   }
 
@@ -402,11 +397,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderChat(activeChatId);
 
-  
-
   // ---------- Projects ----------
   const projectList = document.getElementById("project-list");
-  const addProjectBtn = document.getElementById("add-project");
+  const addProjectBtn = document.getElementById("add-project-btn");
   const projectNameInput = document.getElementById("project-name");
   const projectDeadlineInput = document.getElementById("project-deadline");
 
@@ -420,7 +413,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderProjects() {
     if (!projectList) return;
     projectList.innerHTML = demoProjects.map((p, idx) => {
-      const dl = new Date(p.deadline).toLocaleDateString("ru-RU", { day:"2-digit", month:"short" });
+      const dl = new Date(p.deadline).toLocaleDateString("ru-RU", { day: "2-digit", month: "short" });
       const statusTag = p.status === "Активен" ? "green" : "indigo";
       return `
         <div class="project-card">
@@ -431,7 +424,6 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <span class="tag ${statusTag}">${escapeHtml(p.status)}</span>
           </div>
-
           <div class="project-body">
             <div class="project-metrics">
               <div class="mini-metric"><span class="muted">Состояние</span><span class="strong">${escapeHtml(p.health)}</span></div>
@@ -439,7 +431,6 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="progress-bar"><div class="progress" style="width:${p.progress}%"></div></div>
           </div>
-
           <div class="project-actions">
             <button class="btn btn-primary" data-open-workspace="true" data-project="${idx}">
               <i data-feather="external-link"></i> Открыть workspace
@@ -465,9 +456,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderProjects();
 
-// ---------- Workspace modal (kept from previous build, minimal) ----------
-
-  function setModalOpen(isOpen){
+  // ---------- Workspace modal ----------
+  function setModalOpen(isOpen) {
     document.body.classList.toggle("modal-open", !!isOpen);
   }
 
@@ -480,9 +470,8 @@ document.addEventListener("DOMContentLoaded", () => {
     openWorkspaceButtons = Array.from(document.querySelectorAll("[data-open-workspace]"));
     openWorkspaceButtons.forEach((b) => {
       b.addEventListener("click", () => {
-        // Fill header in workspace modal (demo)
         const idx = Number(b.dataset.project || 0);
-        const p = (typeof demoProjects !== "undefined" && demoProjects[idx]) ? demoProjects[idx] : null;
+        const p = demoProjects[idx] || null;
         const nameEl = document.getElementById("ws-project-name");
         const statusEl = document.getElementById("ws-project-status");
         const nextMeetingEl = document.getElementById("ws-next-meeting");
@@ -513,7 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target?.dataset?.close) closeModal();
   });
 
-  // ---------- Profile modal (top-right icon) ----------
+  // ---------- Profile modal ----------
   const profileBtn = document.getElementById("profile-btn");
   const profileModal = document.getElementById("profile-modal");
   const profileClose = document.getElementById("profile-close");
@@ -549,7 +538,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ---------- Support "ticket chat" (demo) ----------
+  // ---------- Support ----------
   const supportThread = document.getElementById("support-thread");
   const supportForm = document.getElementById("support-form");
   const supportSubject = document.getElementById("support-subject");
@@ -560,14 +549,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const cls = who === "me" ? "me" : "agent";
     const safe = escapeHtml(text);
     const m = meta ? `<div class="meta">${escapeHtml(meta)}</div>` : "";
-    supportThread.insertAdjacentHTML(
-      "beforeend",
-      `<div class="support-bubble ${cls}">${safe}${m}</div>`
-    );
+    supportThread.insertAdjacentHTML("beforeend", `<div class="support-bubble ${cls}">${safe}${m}</div>`);
     supportThread.scrollTop = supportThread.scrollHeight;
   }
 
-  // seed conversation
   if (supportThread && !supportThread.dataset.seeded) {
     supportThread.dataset.seeded = "1";
     addSupportBubble("agent", "Привет! 🐸 Я Froject Support. Опишите вопрос — и я помогу.", "бот • сейчас");
@@ -584,17 +569,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (supportSubject) supportSubject.value = "";
     if (supportMessage) supportMessage.value = "";
 
-    // fake agent reply
     window.setTimeout(() => {
-      addSupportBubble(
-        "agent",
-        "Принято! ✅ Добавьте 2–3 блока в календарь (встреча/дедлайн/фокус) и прогресс‑бар у задач — так нагляднее всего.",
-        "оператор • сейчас"
-      );
+      addSupportBubble("agent", "Принято! ✅ Добавьте 2–3 блока в календарь (встреча/дедлайн/фокус) и прогресс‑бар у задач — так нагляднее всего.", "оператор • сейчас");
     }, 600);
   });
 
-  // Helpers
+  // ---------- Helpers ----------
   function updateDashboard() {
     const tasksCount = document.getElementById("tasks-count");
     const projectsCount = document.getElementById("projects-count");
@@ -610,7 +590,7 @@ document.addEventListener("DOMContentLoaded", () => {
       dateElem.textContent = now.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" });
     }
     if (weekdayElem) {
-      const weekdays = ["воскресенье","понедельник","вторник","среда","четверг","пятница","суббота"];
+      const weekdays = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"];
       weekdayElem.textContent = weekdays[now.getDay()];
     }
   }
@@ -622,7 +602,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   function startOfDay(d) {
     const x = new Date(d);
-    x.setHours(0,0,0,0);
+    x.setHours(0, 0, 0, 0);
     return x;
   }
   function escapeHtml(str) {
