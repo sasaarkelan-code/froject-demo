@@ -1,0 +1,13 @@
+{
+  "name": "Froject — умный трекер проектов",
+  "short_name": "Froject",
+  "description": "Задачи, календарь, чат и прогресс в одном месте.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a1a12",
+  "theme_color": "#0a1a12",
+  "icons": [
+    { "src": "maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "apple-touch-180.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
