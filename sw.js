@@ -1,12 +1,12 @@
 const CACHE = "froject-v1";
 const FILES = [
-  "/",
-  "/index.html",
-  "/style.css",
-  "/js/script.js",
-  "/manifest.json",
-  "/maskable-512.png",
-  "/apple-touch-180.png"
+  "/froject-demo/",
+  "/froject-demo/index.html",
+  "/froject-demo/style.css",
+  "/froject-demo/js/script.js",
+  "/froject-demo/manifest.json",
+  "/froject-demo/maskable-512.png",
+  "/froject-demo/apple-touch-180.png"
 ];
 
 self.addEventListener("install", (e) => {
