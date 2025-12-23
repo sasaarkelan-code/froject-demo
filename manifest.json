@@ -1,13 +1,15 @@
 {
-  "name": "Froject — умный трекер проектов",
+  "name": "Froject",
   "short_name": "Froject",
-  "description": "Задачи, календарь, чат и прогресс в одном месте.",
-  "start_url": "/",
   "display": "standalone",
   "background_color": "#0a1a12",
   "theme_color": "#0a1a12",
   "icons": [
-    { "src": "maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
-    { "src": "apple-touch-180.png", "sizes": "180x180", "type": "image/png" }
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a1a12'/%3E%3Ctext x='50%25' y='50%25' font-size='256' text-anchor='middle' dominant-baseline='middle' fill='%234be39a'%3E🐸%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
   ]
 }
