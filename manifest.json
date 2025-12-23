@@ -1,6 +1,7 @@
 {
   "name": "Froject",
   "short_name": "Froject",
+  "start_url": "/froject-demo/",
   "display": "standalone",
   "background_color": "#0a1a12",
   "theme_color": "#0a1a12",
