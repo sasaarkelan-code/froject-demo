@@ -17,6 +17,22 @@
 </head>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a1a12'/%3E%3Ctext x='50%25' y='50%25' font-size='32' text-anchor='middle' dominant-baseline='middle' fill='%234be39a'%3E🐸%3C/text%3E%3C/svg%3E">
 <body>
+  <div class="auth-overlay" id="auth-overlay">
+    <div class="auth-card">
+      <h2>Вход в Froject</h2>
+      <p class="muted">Демо-авторизация: регистрация и вход по логину/паролю без проверки сервера.</p>
+      <div class="auth-tabs">
+        <button class="seg active" data-auth-tab="login">Вход</button>
+        <button class="seg" data-auth-tab="register">Регистрация</button>
+      </div>
+      <form id="auth-form" class="auth-form">
+        <input id="auth-login" placeholder="Логин" required>
+        <input id="auth-password" type="password" placeholder="Пароль" required>
+        <input id="auth-name" placeholder="Имя (для регистрации)" style="display:none">
+        <button class="btn btn-primary" type="submit">Продолжить</button>
+      </form>
+    </div>
+  </div>
   <div class="app">
     <!--  Sidebar  -->
     <nav class="sidebar">
@@ -30,6 +46,7 @@
         <li class="nav-item" data-section="tasks"><i data-feather="check-square"></i><span>Задачи</span></li>
         <li class="nav-item" data-section="projects"><i data-feather="layers"></i><span>Проекты</span></li>
         <li class="nav-item" data-section="chat"><i data-feather="message-circle"></i><span>Сообщения</span></li>
+        <li class="nav-item" data-section="mail"><i data-feather="mail"></i><span>Почта</span></li>
       </ul>
       <ul class="nav-bottom">
         <li class="nav-item" data-section="settings"><i data-feather="settings"></i><span>Настройки</span></li>
@@ -128,7 +145,7 @@
         <div class="calendar-split">
           <div class="card calendar-card">
             <div class="calendar-grid" id="week-grid"></div>
-            <div class="calendar-legend">
+            <form id="calendar-note-form" class="calendar-note-form"><input id="calendar-note-title" placeholder="Добавить событие" required><select id="calendar-note-day"><option value="0">Пн</option><option value="1">Вт</option><option value="2">Ср</option><option value="3">Чт</option><option value="4">Пт</option></select><input id="calendar-note-time" type="time" value="11:00"><button class="btn btn-primary" type="submit">Добавить</button></form><div class="calendar-legend">
               <span class="legend-item"><span class="dot dot-meeting"></span>Встречи</span>
               <span class="legend-item"><span class="dot dot-deadline"></span>Дедлайны</span>
               <span class="legend-item"><span class="dot dot-focus"></span>Фокус‑слот</span>
@@ -296,6 +313,18 @@
               <input id="chat-input" type="text" placeholder="Написать сообщение..." autocomplete="off">
               <button class="btn btn-primary" id="send-message"><i data-feather="send"></i></button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section id="mail" class="page-section">
+        <div class="page-head"><div><h2>Почта</h2><p class="muted">Встроенный почтовый ящик в стиле Froject.</p></div></div>
+        <div class="messenger card">
+          <aside class="chat-list" id="mail-list"></aside>
+          <div class="chat-panel">
+            <div class="chat-panel-head"><div class="strong" id="mail-subject">Выберите письмо</div></div>
+            <div class="chat-messages" id="mail-body"></div>
           </div>
         </div>
       </section>
