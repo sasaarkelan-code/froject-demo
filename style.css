@@ -605,6 +605,12 @@ img, video { max-width: 100%; display: block; }
   color: rgba(234, 247, 240, .80);
 }
 .task-list-cards { display: grid; gap: 10px; padding: 0 6px 12px; }
+task-card {
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: rgba(255, 255, 255, .05);
+}
 .task-card {
   padding: 14px;
   border-radius: 20px;
@@ -934,7 +940,6 @@ img, video { max-width: 100%; display: block; }
 }
 .toggle input:checked + span { background: rgba(75, 227, 154, .22); border-color: rgba(75, 227, 154, .35); }
 .toggle input:checked + span:after { left: 22px; }
-
 /* ---------- Modal ---------- */
 .modal { position: fixed; inset: 0; display: none; z-index: 50; overflow: auto; }
 .modal.show { display: block; }
@@ -1294,7 +1299,6 @@ img, video { max-width: 100%; display: block; }
   .nav-item { padding: 10px 6px; }
   .week-grid { grid-template-columns: 1fr; }
 }
-
 /* ---------- Modal scroll lock ---------- */
 body.modal-open { overflow: hidden; }
 .modal { overflow: auto; }
@@ -1310,3 +1314,46 @@ html[data-theme='light']{--bg0:#eef6f1;--bg1:#dcece3;--text:#153126;--muted:rgba
 html[data-theme='light'] body{background:linear-gradient(170deg,var(--bg0),var(--bg1))}
 @media (max-width:860px){.app{grid-template-columns:1fr}.sidebar{position:static;height:auto}.content{padding:14px}.dashboard-grid,.calendar-split,.tasks-layout,.support-layout{grid-template-columns:1fr}.widgets{grid-template-columns:1fr 1fr}.profile-grid{grid-template-columns:1fr}.modal-dialog{width:96vw;max-height:90vh;overflow:auto}.chat-panel,.chat-list{min-height:320px}.ws-tabs{overflow:auto;white-space:nowrap}}
 @media (max-width:560px){.widgets{grid-template-columns:1fr}.welcome-stats{grid-template-columns:1fr 1fr}.calendar-note-form{grid-template-columns:1fr}.topbar{flex-wrap:wrap}.content{padding-bottom:90px}}
+
+.auth-dialog{max-width:520px}
+.auth-form{display:grid;gap:10px}
+.auth-form input,.auth-form select{padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--text)}
+.calendar-actions{padding:10px 0}
+#mail-list{min-height:520px;overflow:auto}
+#mail-body{min-height:420px;display:flex;align-items:flex-start}
+#mail-body .bubble{max-width:100%}
+.profile-grid{display:grid;grid-template-columns:1.4fr .9fr;gap:14px}
+.profile-card{padding:16px}.profile-hero{display:flex;gap:14px;align-items:flex-start}.profile-name{font-size:22px;font-weight:800}.profile-about{margin:6px 0 10px;color:var(--muted)}
+.profile-fields .value{font-weight:700;color:var(--text)}
+.profile-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.ws-body{padding:12px}
+.support-ticket-list{display:grid;gap:10px}
+@media (max-width:860px){.profile-grid{grid-template-columns:1fr}.support-chat{min-height:420px}}
+
+/* auth must be the only visible thing before login */
+body:not(.authed) .app { visibility: hidden; }
+#auth-modal { z-index: 200; }
+#auth-modal .modal-backdrop { background: #07130d; backdrop-filter: none; opacity: 1; }
+#auth-modal .modal-dialog { margin-top: 10vh; }
+
+/* profile modal layout fixes */
+.profile-fields { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:12px; }
+.profile-fields .field { background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:10px 12px; }
+.mini-bars .bar-row { display:grid; grid-template-columns: 70px 1fr 40px; gap:10px; align-items:center; margin:8px 0; }
+.mini-bars .bar { height:8px; background: rgba(255,255,255,.1); border-radius:999px; overflow:hidden; }
+.mini-bars .bar span { display:block; height:100%; background: linear-gradient(90deg,var(--frog-300),var(--indigo)); }
+.kpi-grid { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:10px; padding:10px; }
+
+/* workspace content readable */
+.week-grid .day { padding:10px; border:1px solid rgba(255,255,255,.1); border-radius:14px; background: rgba(255,255,255,.03); }
+.mini-list { padding: 10px; display:grid; gap:8px; }
+.mini-item { display:flex; justify-content:space-between; gap:10px; padding:10px; border-radius:12px; background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); }
+
+/* mail visual fixes */
+#mail-list .chat-item { width:100%; border:1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); color: var(--text); border-radius:14px; text-align:left; margin-bottom:8px; }
+#mail-list .chat-item.active { background: linear-gradient(135deg, rgba(75,227,154,.25), rgba(111,124,255,.12)); }
+
+@media (max-width:860px){
+  .profile-fields { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr; }
+}
