@@ -17,9 +17,26 @@ document.addEventListener("DOMContentLoaded", () => {
     tasks: "Мои задачи",
     projects: "Проекты",
     chat: "Сообщения",
+    mail: "Почта",
     support: "Поддержка",
     settings: "Настройки",
   };
+
+
+  // ---------- Auth ----------
+  const authOverlay = document.getElementById("auth-overlay");
+  const authForm = document.getElementById("auth-form");
+  const authName = document.getElementById("auth-name");
+  const authLogin = document.getElementById("auth-login");
+  const authPassword = document.getElementById("auth-password");
+  const authTabs = document.querySelectorAll("[data-auth-tab]");
+  let authMode = "login";
+  authTabs.forEach((t)=>t.addEventListener("click",()=>{authMode=t.dataset.authTab;authTabs.forEach(x=>x.classList.toggle("active",x===t)); if(authName) authName.style.display=authMode==="register"?"block":"none";}));
+  const users = JSON.parse(localStorage.getItem("froject_users")||"{}");
+  const saved = localStorage.getItem("froject_session");
+  if(saved){const u=JSON.parse(saved);document.querySelector(".user-name").textContent=u.name||u.login; if(authOverlay) authOverlay.classList.add("hidden");}
+  authForm?.addEventListener("submit",(e)=>{e.preventDefault(); const login=authLogin.value.trim(); const pass=authPassword.value.trim(); if(!login||!pass) return; if(authMode==="register"){users[login]={pass,name:(authName.value.trim()||login)};localStorage.setItem("froject_users",JSON.stringify(users));}
+  const user=users[login]||{pass,name:login}; if(user.pass!==pass && users[login]) return alert("Неверный пароль"); localStorage.setItem("froject_session",JSON.stringify({login,name:user.name})); document.querySelector(".user-name").textContent=user.name; authOverlay?.classList.add("hidden");});
 
   // ---------- Navigation ----------
   const navItems = document.querySelectorAll(".nav-item");
@@ -573,6 +590,35 @@ document.addEventListener("DOMContentLoaded", () => {
       addSupportBubble("agent", "Принято! ✅ Добавьте 2–3 блока в календарь (встреча/дедлайн/фокус) и прогресс‑бар у задач — так нагляднее всего.", "оператор • сейчас");
     }, 600);
   });
+
+  
+  document.querySelectorAll("[data-section-jump]").forEach((b)=>b.addEventListener("click",()=>showSection(b.dataset.sectionJump)));
+  document.getElementById("theme-select")?.addEventListener("change",(e)=>{document.documentElement.dataset.theme=e.target.value; localStorage.setItem("froject_theme",e.target.value);});
+  const th=localStorage.getItem("froject_theme"); if(th){document.documentElement.dataset.theme=th; const sel=document.getElementById("theme-select"); if(sel) sel.value=th;}
+
+  // workspace tabs fix
+  document.querySelectorAll("#workspace-modal .ws-tab").forEach((t)=>t.addEventListener("click",()=>{
+    document.querySelectorAll("#workspace-modal .ws-tab").forEach(x=>x.classList.toggle("active",x===t));
+    document.querySelectorAll("#workspace-modal .ws-section").forEach(s=>s.classList.toggle("active",s.id===t.dataset.wsTab));
+  }));
+
+  // custom calendar events
+  document.getElementById("calendar-note-form")?.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    const title=document.getElementById("calendar-note-title").value.trim();
+    const day=Number(document.getElementById("calendar-note-day").value);
+    const start=document.getElementById("calendar-note-time").value||"11:00";
+    if(!title) return;
+    calEvents.push({day,start,dur:30,type:"personal",title,sub:"Пользовательское"});
+    document.getElementById("calendar-note-title").value="";
+    renderWeek();
+  });
+
+  const mailList=document.getElementById("mail-list"), mailBody=document.getElementById("mail-body"), mailSubject=document.getElementById("mail-subject");
+  const mails=[{subject:"Добро пожаловать в Froject Mail",from:"support@froject.local",body:"Это демо-письмо вашего нового ящика."},{subject:"Напоминание: дедлайн проекта",from:"team@froject.local",body:"Не забудьте обновить задачи и календарь."}];
+  if(mailList){mailList.innerHTML=mails.map((m,i)=>`<button class="chat-item" data-mail="${i}"><div class="chat-meta"><div class="chat-name">${m.subject}</div><div class="chat-preview">${m.from}</div></div></button>`).join("");
+  mailList.querySelectorAll("[data-mail]").forEach(b=>b.addEventListener("click",()=>{const m=mails[Number(b.dataset.mail)]; mailSubject.textContent=m.subject; mailBody.innerHTML=`<div class="msg them"><div class="bubble">${m.body}</div></div>`;}));}
+
 
   // ---------- Helpers ----------
   function updateDashboard() {
