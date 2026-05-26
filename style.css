@@ -1325,3 +1325,31 @@ html[data-theme='light'] body{background:linear-gradient(170deg,var(--bg0),var(-
 .ws-body{padding:12px}
 .support-ticket-list{display:grid;gap:10px}
 @media (max-width:860px){.profile-grid{grid-template-columns:1fr}.support-chat{min-height:420px}}
+
+/* auth must be the only visible thing before login */
+body:not(.authed) .app { visibility: hidden; }
+#auth-modal { z-index: 200; }
+#auth-modal .modal-backdrop { background: #07130d; backdrop-filter: none; opacity: 1; }
+#auth-modal .modal-dialog { margin-top: 10vh; }
+
+/* profile modal layout fixes */
+.profile-fields { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:12px; }
+.profile-fields .field { background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:10px 12px; }
+.mini-bars .bar-row { display:grid; grid-template-columns: 70px 1fr 40px; gap:10px; align-items:center; margin:8px 0; }
+.mini-bars .bar { height:8px; background: rgba(255,255,255,.1); border-radius:999px; overflow:hidden; }
+.mini-bars .bar span { display:block; height:100%; background: linear-gradient(90deg,var(--frog-300),var(--indigo)); }
+.kpi-grid { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:10px; padding:10px; }
+
+/* workspace content readable */
+.week-grid .day { padding:10px; border:1px solid rgba(255,255,255,.1); border-radius:14px; background: rgba(255,255,255,.03); }
+.mini-list { padding: 10px; display:grid; gap:8px; }
+.mini-item { display:flex; justify-content:space-between; gap:10px; padding:10px; border-radius:12px; background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); }
+
+/* mail visual fixes */
+#mail-list .chat-item { width:100%; border:1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); color: var(--text); border-radius:14px; text-align:left; margin-bottom:8px; }
+#mail-list .chat-item.active { background: linear-gradient(135deg, rgba(75,227,154,.25), rgba(111,124,255,.12)); }
+
+@media (max-width:860px){
+  .profile-fields { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr; }
+}

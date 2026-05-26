@@ -36,9 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
   authTabs.forEach((t)=>t.addEventListener("click",()=>{authMode=t.dataset.authTab;authTabs.forEach(x=>x.classList.toggle("active",x===t));authName.style.display=authMode==="register"?"block":"none";}));
   const users = JSON.parse(localStorage.getItem("froject_users")||"{}");
   const saved = localStorage.getItem("froject_session");
-  if(saved){const u=JSON.parse(saved); if(profileName) profileName.textContent=u.name||u.login;}
+  if(saved){const u=JSON.parse(saved); if(profileName) profileName.textContent=u.name||u.login; document.body.classList.add("authed");}
+  else { openAuth(); }
   authForm?.addEventListener("submit",(e)=>{e.preventDefault(); const login=authLogin.value.trim(); const pass=authPassword.value.trim(); if(!login||!pass) return; if(authMode==="register"){users[login]={pass,name:(authName.value.trim()||login)};localStorage.setItem("froject_users",JSON.stringify(users));}
-  const user=users[login]||{pass,name:login}; if(user.pass!==pass && users[login]) return alert("Неверный пароль"); localStorage.setItem("froject_session",JSON.stringify({login,name:user.name})); if(profileName) profileName.textContent=user.name; closeAuth();});
+  const user=users[login]||{pass,name:login}; if(user.pass!==pass && users[login]) return alert("Неверный пароль"); localStorage.setItem("froject_session",JSON.stringify({login,name:user.name})); if(profileName) profileName.textContent=user.name; document.body.classList.add("authed"); closeAuth();});
 
   // ---------- Navigation ----------
   const navItems = document.querySelectorAll(".nav-item");
@@ -551,6 +552,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target?.dataset?.closeProfile) closeProfile();
   });
 
+
+  document.getElementById("logout-btn")?.addEventListener("click",()=>{
+    localStorage.removeItem("froject_session");
+    document.body.classList.remove("authed");
+    if(profileName) profileName.textContent="Войти";
+    closeProfile();
+    openAuth();
+  });
+
   profTabs.forEach((t) => {
     t.addEventListener("click", () => {
       profTabs.forEach((x) => x.classList.toggle("active", x === t));
@@ -627,8 +637,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const mailList=document.getElementById("mail-list"), mailBody=document.getElementById("mail-body"), mailSubject=document.getElementById("mail-subject");
   const mails=[{subject:"Добро пожаловать в Froject Mail",from:"support@froject.local",body:"Это демо-письмо вашего нового ящика."},{subject:"Напоминание: дедлайн проекта",from:"team@froject.local",body:"Не забудьте обновить задачи и календарь."}];
-  if(mailList){mailList.innerHTML=mails.map((m,i)=>`<button class="chat-item" data-mail="${i}"><div class="chat-meta"><div class="chat-name">${m.subject}</div><div class="chat-preview">${m.from}</div></div></button>`).join("");
-  mailList.querySelectorAll("[data-mail]").forEach(b=>b.addEventListener("click",()=>{const m=mails[Number(b.dataset.mail)]; mailSubject.textContent=m.subject; mailBody.innerHTML=`<div class="msg them"><div class="bubble">${m.body}</div></div>`;}));}
+  if(mailList){mailList.innerHTML=mails.map((m,i)=>`<button class="chat-item mail-item ${i===0?"active":""}" data-mail="${i}"><div class="chat-meta"><div class="chat-name">${m.subject}</div><div class="chat-preview">${m.from}</div></div></button>`).join("");
+  const openMail=(i)=>{const m=mails[i]; mailSubject.textContent=m.subject; mailBody.innerHTML=`<div class="msg them"><div class="bubble">${m.body}</div></div>`; mailList.querySelectorAll(".mail-item").forEach((x,idx)=>x.classList.toggle("active",idx===i));};
+  mailList.querySelectorAll("[data-mail]").forEach(b=>b.addEventListener("click",()=>openMail(Number(b.dataset.mail))));
+  openMail(0);}
 
 
   // ---------- Helpers ----------
