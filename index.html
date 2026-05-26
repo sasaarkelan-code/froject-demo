@@ -17,23 +17,7 @@
 </head>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a1a12'/%3E%3Ctext x='50%25' y='50%25' font-size='32' text-anchor='middle' dominant-baseline='middle' fill='%234be39a'%3E🐸%3C/text%3E%3C/svg%3E">
 <body>
-  <div class="auth-overlay" id="auth-overlay">
-    <div class="auth-card">
-      <h2>Вход в Froject</h2>
-      <p class="muted">Демо-авторизация: регистрация и вход по логину/паролю без проверки сервера.</p>
-      <div class="auth-tabs">
-        <button class="seg active" data-auth-tab="login">Вход</button>
-        <button class="seg" data-auth-tab="register">Регистрация</button>
-      </div>
-      <form id="auth-form" class="auth-form">
-        <input id="auth-login" placeholder="Логин" required>
-        <input id="auth-password" type="password" placeholder="Пароль" required>
-        <input id="auth-name" placeholder="Имя (для регистрации)" style="display:none">
-        <button class="btn btn-primary" type="submit">Продолжить</button>
-      </form>
-    </div>
-  </div>
-  <div class="app">
+    <div class="app">
     <!--  Sidebar  -->
     <nav class="sidebar">
       <div class="sidebar-header">
@@ -61,7 +45,7 @@
         <div class="profile-info">
           <button class="profile-btn" id="profile-btn" aria-label="Открыть профиль">
             <span class="avatar frog">🐸</span>
-            <span class="user-name">Александр</span>
+            <span class="user-name" id="top-user-name">Войти</span>
             <i data-feather="chevron-down"></i>
           </button>
         </div>
@@ -145,7 +129,7 @@
         <div class="calendar-split">
           <div class="card calendar-card">
             <div class="calendar-grid" id="week-grid"></div>
-            <form id="calendar-note-form" class="calendar-note-form"><input id="calendar-note-title" placeholder="Добавить событие" required><select id="calendar-note-day"><option value="0">Пн</option><option value="1">Вт</option><option value="2">Ср</option><option value="3">Чт</option><option value="4">Пт</option></select><input id="calendar-note-time" type="time" value="11:00"><button class="btn btn-primary" type="submit">Добавить</button></form><div class="calendar-legend">
+            <div class="calendar-actions"><button class="btn btn-primary" id="open-calendar-modal"><i data-feather="plus"></i> Добавить задачу</button></div><div class="calendar-legend">
               <span class="legend-item"><span class="dot dot-meeting"></span>Встречи</span>
               <span class="legend-item"><span class="dot dot-deadline"></span>Дедлайны</span>
               <span class="legend-item"><span class="dot dot-focus"></span>Фокус‑слот</span>
@@ -482,6 +466,39 @@
           </div>
         </div>
       </section>
+
+
+      <div class="modal" id="auth-modal" aria-hidden="true">
+        <div class="modal-backdrop" data-close-auth="true"></div>
+        <div class="modal-dialog auth-dialog" role="dialog" aria-modal="true">
+          <div class="modal-header"><h2 id="auth-title">Вход</h2><button class="icon-btn" id="auth-close"><i data-feather="x"></i></button></div>
+          <div class="ws-content">
+            <div class="auth-tabs"><button class="ws-tab active" data-auth-tab="login">Вход</button><button class="ws-tab" data-auth-tab="register">Регистрация</button></div>
+            <form id="auth-form" class="auth-form">
+              <input id="auth-login" placeholder="Логин" required>
+              <input id="auth-password" type="password" placeholder="Пароль" required>
+              <input id="auth-name" placeholder="Имя" style="display:none">
+              <button class="btn btn-primary" type="submit">Продолжить</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" id="calendar-modal" aria-hidden="true">
+        <div class="modal-backdrop" data-close-calendar="true"></div>
+        <div class="modal-dialog auth-dialog" role="dialog" aria-modal="true">
+          <div class="modal-header"><h2>Добавить задачу в календарь</h2><button class="icon-btn" id="calendar-close"><i data-feather="x"></i></button></div>
+          <div class="ws-content">
+            <form id="calendar-note-form" class="auth-form">
+              <input id="calendar-note-title" placeholder="Название" required>
+              <select id="calendar-note-day"><option value="0">Пн</option><option value="1">Вт</option><option value="2">Ср</option><option value="3">Чт</option><option value="4">Пт</option></select>
+              <input id="calendar-note-time" type="time" value="11:00">
+              <select id="calendar-note-type"><option value="meeting">Встреча</option><option value="deadline">Дедлайн</option><option value="focus">Фокус</option><option value="personal">Личное</option></select>
+              <button class="btn btn-primary" type="submit">Добавить</button>
+            </form>
+          </div>
+        </div>
+      </div>
 
       <!-- Profile modal -->
       <div class="modal" id="profile-modal" aria-hidden="true">

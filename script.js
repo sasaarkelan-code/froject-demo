@@ -21,22 +21,24 @@ document.addEventListener("DOMContentLoaded", () => {
     support: "Поддержка",
     settings: "Настройки",
   };
-
-
   // ---------- Auth ----------
-  const authOverlay = document.getElementById("auth-overlay");
+  const authModal = document.getElementById("auth-modal");
+  const authClose = document.getElementById("auth-close");
+  const profileName = document.getElementById("top-user-name");
   const authForm = document.getElementById("auth-form");
   const authName = document.getElementById("auth-name");
   const authLogin = document.getElementById("auth-login");
   const authPassword = document.getElementById("auth-password");
-  const authTabs = document.querySelectorAll("[data-auth-tab]");
+  const authTabs = document.querySelectorAll("#auth-modal [data-auth-tab]");
   let authMode = "login";
-  authTabs.forEach((t)=>t.addEventListener("click",()=>{authMode=t.dataset.authTab;authTabs.forEach(x=>x.classList.toggle("active",x===t)); if(authName) authName.style.display=authMode==="register"?"block":"none";}));
+  function openAuth(){authModal?.classList.add("show");authModal?.setAttribute("aria-hidden","false");setModalOpen(true);}
+  function closeAuth(){authModal?.classList.remove("show");authModal?.setAttribute("aria-hidden","true");setModalOpen(false);}
+  authTabs.forEach((t)=>t.addEventListener("click",()=>{authMode=t.dataset.authTab;authTabs.forEach(x=>x.classList.toggle("active",x===t));authName.style.display=authMode==="register"?"block":"none";}));
   const users = JSON.parse(localStorage.getItem("froject_users")||"{}");
   const saved = localStorage.getItem("froject_session");
-  if(saved){const u=JSON.parse(saved);document.querySelector(".user-name").textContent=u.name||u.login; if(authOverlay) authOverlay.classList.add("hidden");}
+  if(saved){const u=JSON.parse(saved); if(profileName) profileName.textContent=u.name||u.login;}
   authForm?.addEventListener("submit",(e)=>{e.preventDefault(); const login=authLogin.value.trim(); const pass=authPassword.value.trim(); if(!login||!pass) return; if(authMode==="register"){users[login]={pass,name:(authName.value.trim()||login)};localStorage.setItem("froject_users",JSON.stringify(users));}
-  const user=users[login]||{pass,name:login}; if(user.pass!==pass && users[login]) return alert("Неверный пароль"); localStorage.setItem("froject_session",JSON.stringify({login,name:user.name})); document.querySelector(".user-name").textContent=user.name; authOverlay?.classList.add("hidden");});
+  const user=users[login]||{pass,name:login}; if(user.pass!==pass && users[login]) return alert("Неверный пароль"); localStorage.setItem("froject_session",JSON.stringify({login,name:user.name})); if(profileName) profileName.textContent=user.name; closeAuth();});
 
   // ---------- Navigation ----------
   const navItems = document.querySelectorAll(".nav-item");
@@ -541,7 +543,9 @@ document.addEventListener("DOMContentLoaded", () => {
     setModalOpen(false);
   }
 
-  profileBtn?.addEventListener("click", openProfile);
+  profileBtn?.addEventListener("click", () => { if(localStorage.getItem("froject_session")) openProfile(); else openAuth(); });
+  authClose?.addEventListener("click", closeAuth);
+  authModal?.querySelector(".modal-backdrop")?.addEventListener("click",(e)=>{if(e.target?.dataset?.closeAuth) closeAuth();});
   profileClose?.addEventListener("click", closeProfile);
   profileBackdrop?.addEventListener("click", (e) => {
     if (e.target?.dataset?.closeProfile) closeProfile();
@@ -602,6 +606,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("#workspace-modal .ws-section").forEach(s=>s.classList.toggle("active",s.id===t.dataset.wsTab));
   }));
 
+  const calendarModal=document.getElementById("calendar-modal");
+  document.getElementById("open-calendar-modal")?.addEventListener("click",()=>{calendarModal?.classList.add("show"); setModalOpen(true);});
+  document.getElementById("calendar-close")?.addEventListener("click",()=>{calendarModal?.classList.remove("show"); setModalOpen(false);});
+  calendarModal?.querySelector(".modal-backdrop")?.addEventListener("click",(e)=>{if(e.target?.dataset?.closeCalendar){calendarModal.classList.remove("show"); setModalOpen(false);}});
+
   // custom calendar events
   document.getElementById("calendar-note-form")?.addEventListener("submit",(e)=>{
     e.preventDefault();
@@ -609,7 +618,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const day=Number(document.getElementById("calendar-note-day").value);
     const start=document.getElementById("calendar-note-time").value||"11:00";
     if(!title) return;
-    calEvents.push({day,start,dur:30,type:"personal",title,sub:"Пользовательское"});
+    const type=document.getElementById("calendar-note-type").value||"personal";
+    calEvents.push({day,start,dur:30,type,title,sub:"Пользовательское"});
+    calendarModal?.classList.remove("show"); setModalOpen(false);
     document.getElementById("calendar-note-title").value="";
     renderWeek();
   });
