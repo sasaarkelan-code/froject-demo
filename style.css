@@ -1057,25 +1057,25 @@ task-card {
   border-radius: 999px;
   overflow: hidden;
 }
-.bar {
+.bar-track {
+  position: relative;
+  height: 12px;
+  background: rgba(255, 255, 255, .10);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar-fill {
   position: absolute;
-  left: 0;
+  left: var(--left, 0);
+  width: var(--width, 0);
   top: 0;
   height: 100%;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--frog-300), rgba(111, 124, 255, .65));
 }
-.bar-done { background: linear-gradient(90deg, var(--frog-400), var(--frog-500)); }
-.bar-risk { background: linear-gradient(90deg, #ff6b6b, #ffcf5a); }
-.bar span {
-  position: absolute;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 10px;
-  font-weight: 800;
-  color: var(--bg0);
-}
+.bar-fill.done { background: linear-gradient(90deg, var(--frog-400), var(--frog-500)); }
+.bar-fill.doing { background: linear-gradient(90deg, #59e1b0, #6f7cff); }
+.bar-fill.planned { background: linear-gradient(90deg, #6f7cff, #b39cff); }
 .week {
   display: flex;
   flex-direction: column;
@@ -1363,3 +1363,31 @@ body:not(.authed) #auth-modal { display: block; visibility: visible; }
   .profile-fields { grid-template-columns: 1fr; }
   .kpi-grid { grid-template-columns: 1fr; }
 }
+
+
+/* form readability and light theme fixes */
+#calendar-note-form select,
+#calendar-note-form select option { color: #0f2a1f; background: #e9f6ef; }
+html[data-theme='dark'] #calendar-note-form select,
+html[data-theme='dark'] #calendar-note-form select option { color: #eaf7f0; background: #193629; }
+
+html[data-theme='light'] .card,
+html[data-theme='light'] .widget,
+html[data-theme='light'] .chat-item,
+html[data-theme='light'] .chat-panel,
+html[data-theme='light'] .modal-dialog,
+html[data-theme='light'] .kpi,
+html[data-theme='light'] .gantt-row,
+html[data-theme='light'] .member-card,
+html[data-theme='light'] .ws-tasklist li {
+  color: #163428;
+  border-color: rgba(17,55,40,.12);
+  background: rgba(255,255,255,.78);
+}
+html[data-theme='light'] .muted,
+html[data-theme='light'] .task-meta,
+html[data-theme='light'] .chat-preview,
+html[data-theme='light'] .ws-task-sub { color: rgba(20,55,42,.72); }
+html[data-theme='light'] .select,
+html[data-theme='light'] input,
+html[data-theme='light'] textarea { color:#163428; background: rgba(255,255,255,.9); border-color: rgba(17,55,40,.2);}
