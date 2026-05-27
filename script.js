@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function openAuth(){authModal?.classList.add("show");authModal?.setAttribute("aria-hidden","false");setModalOpen(true);}
   function closeAuth(){if(!document.body.classList.contains("authed")) return; authModal?.classList.remove("show");authModal?.setAttribute("aria-hidden","true");setModalOpen(false);}
   authTabs.forEach((t)=>t.addEventListener("click",()=>{authMode=t.dataset.authTab;authTabs.forEach(x=>x.classList.toggle("active",x===t));authName.style.display=authMode==="register"?"block":"none";}));
-    const readJson = (key, fallback) => {
+  const readJson = (key, fallback) => {
     try {
       const raw = localStorage.getItem(key);
       return raw ? JSON.parse(raw) : fallback;
