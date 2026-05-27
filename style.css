@@ -1332,6 +1332,7 @@ html[data-theme='light'] body{background:linear-gradient(170deg,var(--bg0),var(-
 
 /* auth must be the only visible thing before login */
 body:not(.authed) .app { visibility: hidden; }
+body:not(.authed) #auth-modal { display: block; }
 #auth-modal { z-index: 200; }
 #auth-modal .modal-backdrop { background: #07130d; backdrop-filter: none; opacity: 1; }
 #auth-modal .modal-dialog { margin-top: 10vh; }
