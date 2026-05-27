@@ -1331,7 +1331,13 @@ html[data-theme='light'] body{background:linear-gradient(170deg,var(--bg0),var(-
 @media (max-width:860px){.profile-grid{grid-template-columns:1fr}.support-chat{min-height:420px}}
 
 /* auth must be the only visible thing before login */
-body:not(.authed) .app { visibility: hidden; }
+body:not(.authed) .sidebar,
+body:not(.authed) .topbar,
+body:not(.authed) .page-section,
+body:not(.authed) #profile-modal,
+body:not(.authed) #workspace-modal,
+body:not(.authed) #calendar-modal { visibility: hidden; }
+body:not(.authed) #auth-modal { display: block; visibility: visible; }
 #auth-modal { z-index: 200; }
 #auth-modal .modal-backdrop { background: #07130d; backdrop-filter: none; opacity: 1; }
 #auth-modal .modal-dialog { margin-top: 10vh; }
