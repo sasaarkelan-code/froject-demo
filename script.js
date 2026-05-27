@@ -627,6 +627,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // workspace tabs fix
   document.querySelectorAll("#workspace-modal .ws-tab").forEach((t)=>t.addEventListener("click",()=>{
+    if (t.dataset.wsTab === "ws-chat") {
+      closeModal();
+      showSection("chat");
+      return;
+    }
     document.querySelectorAll("#workspace-modal .ws-tab").forEach(x=>x.classList.toggle("active",x===t));
     document.querySelectorAll("#workspace-modal .ws-section").forEach(s=>s.classList.toggle("active",s.id===t.dataset.wsTab));
   }));
@@ -651,9 +656,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const mailList=document.getElementById("mail-list"), mailBody=document.getElementById("mail-body"), mailSubject=document.getElementById("mail-subject");
-  const mails=[{subject:"Добро пожаловать в Froject Mail",from:"support@froject.local",body:"Это демо-письмо вашего нового ящика."},{subject:"Напоминание: дедлайн проекта",from:"team@froject.local",body:"Не забудьте обновить задачи и календарь."}];
-  if(mailList){mailList.innerHTML=mails.map((m,i)=>`<button class="chat-item mail-item ${i===0?"active":""}" data-mail="${i}"><div class="chat-meta"><div class="chat-name">${m.subject}</div><div class="chat-preview">${m.from}</div></div></button>`).join("");
-  const openMail=(i)=>{const m=mails[i]; mailSubject.textContent=m.subject; mailBody.innerHTML=`<div class="msg them"><div class="bubble">${m.body}</div></div>`; mailList.querySelectorAll(".mail-item").forEach((x,idx)=>x.classList.toggle("active",idx===i));};
+  const mails=[{subject:"Добро пожаловать в Froject Mail",from:"support@froject.local",name:"Froject Support",time:"сегодня, 10:24",body:"Это демо-письмо вашего нового ящика. Здесь будут уведомления, апдейты и ответы команды."},{subject:"Напоминание: дедлайн проекта",from:"team@froject.local",name:"Команда Froject",time:"вчера, 18:42",body:"Не забудьте обновить задачи и календарь. Рекомендуем закрыть 2 ключевые задачи до конца дня."}];
+  if(mailList){mailList.innerHTML=mails.map((m,i)=>`<button class="chat-item mail-item ${i===0?"active":""}" data-mail="${i}"><div class="chat-meta"><div class="chat-top"><span class="chat-name">${m.name}</span><span class="chat-time">${m.time}</span></div><div class="chat-preview">${m.subject}</div><div class="muted">${m.from}</div></div></button>`).join("");
+  const openMail=(i)=>{const m=mails[i]; mailSubject.textContent=m.subject; mailBody.innerHTML=`<div class="msg them"><div class="bubble"><strong>${m.subject}</strong><br><span class="muted">От: ${m.name} • ${m.from}</span><br><br>${m.body}</div></div>`; mailList.querySelectorAll(".mail-item").forEach((x,idx)=>x.classList.toggle("active",idx===i));};
   mailList.querySelectorAll("[data-mail]").forEach(b=>b.addEventListener("click",()=>openMail(Number(b.dataset.mail))));
   openMail(0);}
 

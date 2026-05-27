@@ -1338,7 +1338,6 @@ body:not(.authed) #profile-modal,
 body:not(.authed) #workspace-modal,
 body:not(.authed) #calendar-modal { visibility: hidden; }
 body:not(.authed) #auth-modal { display: block; visibility: visible; }
-body:not(.authed) #auth-modal { display: block; }
 #auth-modal { z-index: 200; }
 #auth-modal .modal-backdrop { background: #07130d; backdrop-filter: none; opacity: 1; }
 #auth-modal .modal-dialog { margin-top: 10vh; }
@@ -1392,3 +1391,88 @@ html[data-theme='light'] .ws-task-sub { color: rgba(20,55,42,.72); }
 html[data-theme='light'] .select,
 html[data-theme='light'] input,
 html[data-theme='light'] textarea { color:#163428; background: rgba(255,255,255,.9); border-color: rgba(17,55,40,.2);}
+
+/* ===== Ultra visual polish pack ===== */
+:root{
+  --glow-frog: 0 0 0 1px rgba(75,227,154,.28), 0 12px 36px rgba(75,227,154,.18), 0 26px 64px rgba(111,124,255,.16);
+}
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: -20% -10% auto -10%;
+  height: 70vh;
+  pointer-events:none;
+  background:
+    radial-gradient(44% 36% at 20% 30%, rgba(75,227,154,.14), transparent 70%),
+    radial-gradient(40% 34% at 80% 22%, rgba(111,124,255,.16), transparent 72%),
+    radial-gradient(30% 28% at 55% 72%, rgba(255,255,255,.06), transparent 75%);
+  filter: blur(10px) saturate(120%);
+  z-index: -1;
+}
+
+.card,.widget,.modal-dialog,.chat-item,.task-card,.project-card,.member-card,.support-bubble,.kpi,.ws-tasklist li{
+  box-shadow: 0 12px 40px rgba(0,0,0,.22);
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, border-color .28s ease, background .28s ease;
+}
+
+.card:hover,.widget:hover,.task-card:hover,.project-card:hover,.member-card:hover,.chat-item:hover,.kpi:hover,.ws-tasklist li:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--glow-frog);
+  border-color: rgba(75,227,154,.28);
+}
+
+.btn,.chip,.ws-tab,.seg,.nav-item,.icon-btn,.profile-btn{
+  transition: all .24s ease;
+}
+.btn:hover,.chip:hover,.ws-tab:hover,.seg:hover,.nav-item:hover,.icon-btn:hover,.profile-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(75,227,154,.18);
+}
+
+.nav-item.active,
+.ws-tab.active,
+.seg.active,
+.chip-active,
+.chat-item.active{
+  box-shadow: var(--glow-frog);
+}
+
+.progress,.bar-fill,.event,.dot-online{
+  animation: breathe 3.6s ease-in-out infinite;
+}
+
+@keyframes breathe{
+  0%,100%{filter: saturate(100%) brightness(100%)}
+  50%{filter: saturate(124%) brightness(112%)}
+}
+
+.modal.show .modal-dialog{
+  animation: modalIn .36s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes modalIn{
+  from{opacity:0; transform: translateY(16px) scale(.985)}
+  to{opacity:1; transform: translateY(0) scale(1)}
+}
+
+.page-section.active{ animation: pageFade .36s ease; }
+@keyframes pageFade{
+  from{opacity:.25; transform: translateY(6px)}
+  to{opacity:1; transform: translateY(0)}
+}
+
+html[data-theme='light'] .card,
+html[data-theme='light'] .widget,
+html[data-theme='light'] .modal-dialog{
+  box-shadow: 0 12px 38px rgba(18,52,39,.14);
+}
+
+html[data-theme='light'] .nav-item.active,
+html[data-theme='light'] .ws-tab.active,
+html[data-theme='light'] .chat-item.active{
+  background: linear-gradient(135deg, rgba(75,227,154,.28), rgba(111,124,255,.16));
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none !important; transition:none !important;}
+}
