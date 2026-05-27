@@ -36,10 +36,24 @@ document.addEventListener("DOMContentLoaded", () => {
   function openAuth(){authModal?.classList.add("show");authModal?.setAttribute("aria-hidden","false");setModalOpen(true);}
   function closeAuth(){authModal?.classList.remove("show");authModal?.setAttribute("aria-hidden","true");setModalOpen(false);}
   authTabs.forEach((t)=>t.addEventListener("click",()=>{authMode=t.dataset.authTab;authTabs.forEach(x=>x.classList.toggle("active",x===t));authName.style.display=authMode==="register"?"block":"none";}));
-  const users = JSON.parse(localStorage.getItem("froject_users")||"{}");
-  const saved = localStorage.getItem("froject_session");
-  if(saved){const u=JSON.parse(saved); if(profileName) profileName.textContent=u.name||u.login; document.body.classList.add("authed");}
-  else { openAuth(); }
+    const readJson = (key, fallback) => {
+    try {
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch {
+      localStorage.removeItem(key);
+      return fallback;
+    }
+  };
+
+  const users = readJson("froject_users", {});
+  const saved = readJson("froject_session", null);
+  if (saved && (saved.login || saved.name)) {
+    if (profileName) profileName.textContent = saved.name || saved.login;
+    document.body.classList.add("authed");
+  } else {
+    openAuth();
+  }
   authForm?.addEventListener("submit",(e)=>{e.preventDefault(); const login=authLogin.value.trim(); const pass=authPassword.value.trim(); if(!login||!pass) return; if(authMode==="register"){users[login]={pass,name:(authName.value.trim()||login)};localStorage.setItem("froject_users",JSON.stringify(users));}
   const user=users[login]||{pass,name:login}; if(user.pass!==pass && users[login]) return alert("Неверный пароль"); localStorage.setItem("froject_session",JSON.stringify({login,name:user.name})); if(profileName) profileName.textContent=user.name; document.body.classList.add("authed"); closeAuth();});
 
