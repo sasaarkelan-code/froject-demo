@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const authTabs = document.querySelectorAll("#auth-modal [data-auth-tab]");
   let authMode = "login";
   function openAuth(){authModal?.classList.add("show");authModal?.setAttribute("aria-hidden","false");setModalOpen(true);}
-  function closeAuth(){authModal?.classList.remove("show");authModal?.setAttribute("aria-hidden","true");setModalOpen(false);}
+  function closeAuth(){if(!document.body.classList.contains("authed")) return; authModal?.classList.remove("show");authModal?.setAttribute("aria-hidden","true");setModalOpen(false);}
   authTabs.forEach((t)=>t.addEventListener("click",()=>{authMode=t.dataset.authTab;authTabs.forEach(x=>x.classList.toggle("active",x===t));authName.style.display=authMode==="register"?"block":"none";}));
     const readJson = (key, fallback) => {
     try {
