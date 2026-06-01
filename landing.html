@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Froject — операционная система для команд</title>
+  <meta name="description" content="AI-управляемое пространство для координации команды: задачи, календарь, аналитика, почта и тикеты в одном месте.">
+  <meta name="theme-color" content="#0F1115">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1115'/%3E%3Ccircle cx='32' cy='32' r='14' fill='%233D8B68'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+  <!-- ATMOSPHERE LAYER -->
+  <div class="atmosphere" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="grid-bg"></div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="nav">
+    <a class="brand" href="#top">
+      <span class="brand-mark"></span>
+      <span class="brand-name">Froject</span>
+      <span class="brand-tag">BETA</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#product">Продукт</a>
+      <a href="#modules">Модули</a>
+      <a href="#ai">AI</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#about">О нас</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="btn-ghost" data-auth="login">Войти</button>
+      <button class="btn-primary" data-auth="register">Начать бесплатно</button>
+    </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Меню">☰</button>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-tag">
+        <span class="dot"></span> AI-управляемая платформа · v2.0
+      </div>
+      <h1 class="hero-title">
+        Операционная система<br>
+        <span class="grad">для целеустремлённых команд</span>
+      </h1>
+      <p class="hero-sub">
+        Froject объединяет задачи, календарь, аналитику, почту и тикеты в одной AI-управляемой среде —
+        меньше координации, больше работы в срок.
+      </p>
+      <div class="hero-cta">
+        <button class="btn-primary big" data-auth="register">Начать бесплатно</button>
+        <button class="btn-ghost big" data-auth="login">Войти</button>
+        <a class="btn-link" href="index.html?demo=1">Открыть демо →</a>
+      </div>
+
+      <!-- Hero preview card -->
+      <div class="hero-preview">
+        <div class="preview-bar">
+          <span class="bar-dot red"></span>
+          <span class="bar-dot yellow"></span>
+          <span class="bar-dot green"></span>
+          <span class="bar-title">Froject · dashboard</span>
+          <span class="bar-spacer"></span>
+          <span class="bar-pill"><span class="pulse"></span> AI · мониторинг</span>
+        </div>
+        <div class="preview-grid">
+          <div class="prev-side">
+            <div class="ps-item active">⬢ Главная</div>
+            <div class="ps-item">📅 Календарь</div>
+            <div class="ps-item">✓ Задачи</div>
+            <div class="ps-item">📊 Аналитика</div>
+            <div class="ps-item">✉ Почта</div>
+          </div>
+          <div class="prev-main">
+            <div class="prev-kpis">
+              <div class="kpi"><span class="kpi-lbl">В СРОК</span><span class="kpi-val">86<sub>%</sub></span></div>
+              <div class="kpi"><span class="kpi-lbl">ФОКУС</span><span class="kpi-val">6<sub>ч</sub></span></div>
+              <div class="kpi"><span class="kpi-lbl">ЗАДАЧ/НЕД</span><span class="kpi-val">19</span></div>
+              <div class="kpi"><span class="kpi-lbl">КОМАНДА</span><span class="kpi-val">12</span></div>
+            </div>
+            <div class="prev-chart">
+              <svg viewBox="0 0 320 80" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stop-color="#6CB48D" stop-opacity="0.55"/>
+                    <stop offset="1" stop-color="#6CB48D" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,55 L40,48 L80,52 L120,40 L160,42 L200,30 L240,32 L280,18 L320,22 L320,80 L0,80 Z" fill="url(#g1)"/>
+                <path d="M0,55 L40,48 L80,52 L120,40 L160,42 L200,30 L240,32 L280,18 L320,22" stroke="#6CB48D" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+            <div class="prev-ai">
+              <span class="ai-i">✦</span>
+              <div>
+                <div class="ai-t">AI · Smart Scheduling</div>
+                <div class="ai-d">Найдено окно для синка: <b>чт 12:30</b> — без конфликтов и фокус-слотов.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust">
+      <span class="trust-lbl">DOVERIRYU TRACKER · обновляется ежедневно</span>
+      <div class="trust-row">
+        <span>+12% задач закрыто в срок</span>
+        <span>−25% времени на координацию</span>
+        <span>0 потерянных дедлайнов</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT / ABOUT -->
+  <section class="section" id="product">
+    <div class="section-head">
+      <span class="kicker">Продукт</span>
+      <h2>Один интерфейс — пять рабочих сред</h2>
+      <p class="lead">Команда видит общий контекст: что в работе, что в риске, что нужно от каждого. AI помогает находить окна для встреч, переносить дедлайны и держать фокус.</p>
+    </div>
+    <div class="features-grid">
+      <article class="feature glass-card">
+        <div class="f-ico">✦</div>
+        <h3>AI-управление</h3>
+        <p>Алгоритмы Smart Scheduling и Auto-Priority анализируют загрузку, дедлайны и фокус-слоты — и подсказывают, что делать сейчас.</p>
+      </article>
+      <article class="feature glass-card">
+        <div class="f-ico">⚡</div>
+        <h3>Скорость как фича</h3>
+        <p>Хоткеи, command bar, контекстное меню по правой кнопке. От мысли до действия — один шаг.</p>
+      </article>
+      <article class="feature glass-card">
+        <div class="f-ico">⛯</div>
+        <h3>Реальное время</h3>
+        <p>Команда видит изменения мгновенно: статусы задач, новые тикеты, входящие письма — всё в одном интерфейсе.</p>
+      </article>
+      <article class="feature glass-card">
+        <div class="f-ico">🛡</div>
+        <h3>Корпоративный контроль</h3>
+        <p>Роли, доступы, аудит, SSO. Базовый юзер не сломает структуру проекта — а менеджер видит всё.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section class="section dark" id="modules">
+    <div class="section-head">
+      <span class="kicker">Модули</span>
+      <h2>Всё, что нужно команде —<br>уже встроено</h2>
+      <p class="lead">Никаких 12 SaaS-подписок. Один продукт — пять рабочих сред с общим контекстом и AI-слоем поверх них.</p>
+    </div>
+    <div class="modules-grid">
+      <article class="module">
+        <div class="m-ico calendar-ico">📅</div>
+        <h3>Calendar</h3>
+        <p>Недельный grid, события с типами (встречи, дедлайны, фокус-слоты, личное), Smart Scheduling находит окно за секунды.</p>
+        <ul class="m-list">
+          <li>Drag &amp; drop</li>
+          <li>AI поиск окна</li>
+          <li>Sync с командой</li>
+        </ul>
+      </article>
+      <article class="module">
+        <div class="m-ico crm-ico">⛓</div>
+        <h3>CRM</h3>
+        <p>Воронка сделок, контакты, активность. Каждый клиент — карточка с историей коммуникации и предсказанием конверсии.</p>
+        <ul class="m-list">
+          <li>Pipeline</li>
+          <li>Lead scoring</li>
+          <li>AI insights</li>
+        </ul>
+      </article>
+      <article class="module">
+        <div class="m-ico analytics-ico">📊</div>
+        <h3>Analytics</h3>
+        <p>Дашборд эффективности: задачи в срок, среднее время решения, фокус-часы, риски дедлайнов. Минималистично.</p>
+        <ul class="m-list">
+          <li>KPI команды</li>
+          <li>Прогнозы</li>
+          <li>Custom reports</li>
+        </ul>
+      </article>
+      <article class="module">
+        <div class="m-ico team-ico">👥</div>
+        <h3>Team Management</h3>
+        <p>Роли, загрузка, фокус-окна, отпуска. Видно, кто перегружен, у кого тихий день и кто сейчас «в потоке».</p>
+        <ul class="m-list">
+          <li>Workload</li>
+          <li>Roles &amp; access</li>
+          <li>1:1 notes</li>
+        </ul>
+      </article>
+      <article class="module">
+        <div class="m-ico mail-ico">✉</div>
+        <h3>Froject Mail</h3>
+        <p>Встроенная почта в формате <code>user@fmail.ru</code>. Папки, фильтры, ответы, отправка — без переключения вкладок.</p>
+        <ul class="m-list">
+          <li>Inbox / Sent</li>
+          <li>Archive</li>
+          <li>AI-помощник</li>
+        </ul>
+      </article>
+      <article class="module">
+        <div class="m-ico tickets-ico">🎫</div>
+        <h3>Support &amp; Tickets</h3>
+        <p>Тикет-система с приоритетами, статусами и мини-чатом. Внешние клиенты или внутренний саппорт — на ваш выбор.</p>
+        <ul class="m-list">
+          <li>SLA</li>
+          <li>Priority</li>
+          <li>Internal chat</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- AI SECTION -->
+  <section class="section ai-section" id="ai">
+    <div class="section-head">
+      <span class="kicker">AI · ядро системы</span>
+      <h2>Не помощник. <span class="grad">Соавтор работы.</span></h2>
+      <p class="lead">AI-слой проходит сквозь все модули: видит контекст задач, календарь, переписку и метрики команды — и подсказывает, как двигаться быстрее без перегрузки.</p>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-card glass-card large">
+        <div class="ai-icon-big">✦</div>
+        <h3>Smart Scheduling</h3>
+        <p>Находит окна для встреч, учитывая занятость, фокус-слоты и личное время участников. Никаких «давайте созвонимся, когда удобно».</p>
+        <div class="ai-meta">экономит <b>~3 часа</b> в неделю</div>
+      </div>
+      <div class="ai-card glass-card">
+        <div class="ai-icon">⚙</div>
+        <h3>Auto-Priority</h3>
+        <p>Сортирует задачи по сроку, важности проекта и активности коллег.</p>
+      </div>
+      <div class="ai-card glass-card">
+        <div class="ai-icon">📈</div>
+        <h3>Productivity Insights</h3>
+        <p>Еженедельный отчёт: куда уходит время команды, где зоны риска, что улучшить.</p>
+      </div>
+      <div class="ai-card glass-card">
+        <div class="ai-icon">⌖</div>
+        <h3>Auto-Deadlines</h3>
+        <p>AI предлагает разумные дедлайны на основе оценок и истории команды.</p>
+      </div>
+      <div class="ai-card glass-card">
+        <div class="ai-icon">⌗</div>
+        <h3>Mail Triage</h3>
+        <p>Сортировка входящих по важности и предложенные ответы в один клик.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section pricing-section" id="pricing">
+    <div class="section-head">
+      <span class="kicker">Тарифы</span>
+      <h2>Прозрачные цены<br>без скрытых модулей</h2>
+      <p class="lead">Все функции — во всех тарифах. Платите только за размер команды и объём.</p>
+      <div class="billing-toggle">
+        <button class="bt active" data-bill="month">Помесячно</button>
+        <button class="bt" data-bill="year">Годовая <span class="save">−20%</span></button>
+      </div>
+    </div>
+    <div class="pricing-grid">
+      <article class="plan">
+        <div class="plan-head">
+          <h3>Basic</h3>
+          <p class="plan-desc">Для соло-предпринимателей и фрилансеров</p>
+        </div>
+        <div class="plan-price">
+          <span class="price-cur">₽</span>
+          <span class="price-val" data-month="0" data-year="0">0</span>
+          <span class="price-per">/мес</span>
+        </div>
+        <ul class="plan-feat">
+          <li>До 3 проектов</li>
+          <li>5 ГБ хранилище</li>
+          <li>Базовый календарь и задачи</li>
+          <li>Froject Mail</li>
+          <li>Базовый AI</li>
+        </ul>
+        <button class="plan-cta btn-ghost" data-auth="register">Начать</button>
+      </article>
+
+      <article class="plan featured">
+        <div class="plan-tag">Популярный выбор</div>
+        <div class="plan-head">
+          <h3>Team</h3>
+          <p class="plan-desc">Для команд до 25 человек</p>
+        </div>
+        <div class="plan-price">
+          <span class="price-cur">₽</span>
+          <span class="price-val" data-month="990" data-year="9504">990</span>
+          <span class="price-per">/польз/мес</span>
+        </div>
+        <ul class="plan-feat">
+          <li><b>Всё из Basic</b></li>
+          <li>Неограниченно проектов</li>
+          <li>100 ГБ хранилище</li>
+          <li>Smart Scheduling + Auto-Priority</li>
+          <li>Tickets &amp; Support</li>
+          <li>Роли и доступы</li>
+          <li>Productivity Insights</li>
+        </ul>
+        <button class="plan-cta btn-primary" data-auth="register">Попробовать 14 дней</button>
+      </article>
+
+      <article class="plan">
+        <div class="plan-head">
+          <h3>Business</h3>
+          <p class="plan-desc">Для растущих компаний и enterprise</p>
+        </div>
+        <div class="plan-price">
+          <span class="price-cur">₽</span>
+          <span class="price-val" data-month="2490" data-year="23904">2490</span>
+          <span class="price-per">/польз/мес</span>
+        </div>
+        <ul class="plan-feat">
+          <li><b>Всё из Team</b></li>
+          <li>Безлимитный CRM</li>
+          <li>1 ТБ хранилище</li>
+          <li>SSO, SAML, аудит</li>
+          <li>Кастомные роли</li>
+          <li>Приоритетная поддержка 24/7</li>
+          <li>SLA 99.9%</li>
+        </ul>
+        <button class="plan-cta btn-ghost" data-auth="register">Связаться</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about-section" id="about">
+    <div class="about-grid">
+      <div>
+        <span class="kicker">О нас</span>
+        <h2>Мы строим инструмент,<br>в котором сами работаем</h2>
+        <p class="lead">Froject начался как внутренний эксперимент — нам надоело переключаться между Notion, Asana, Slack и Gmail. Так появилась система, в которой задачи, календарь, почта и аналитика живут в одной плоскости.</p>
+        <p class="lead">Сегодня это AI-управляемая операционная среда для команд, которые ценят скорость, контекст и красивые интерфейсы.</p>
+        <div class="about-stats">
+          <div><b>2k+</b><span>команд</span></div>
+          <div><b>180+</b><span>стран</span></div>
+          <div><b>98%</b><span>retention</span></div>
+          <div><b>4.8★</b><span>оценка</span></div>
+        </div>
+      </div>
+      <div class="about-visual glass-card">
+        <div class="av-row">
+          <span class="av-dot" style="background:#6CB48D"></span>
+          <span class="av-text"><b>Smart Scheduling</b> подобрал окно для синка команды</span>
+          <span class="av-time">12:30</span>
+        </div>
+        <div class="av-row">
+          <span class="av-dot" style="background:#D4A857"></span>
+          <span class="av-text">Алёна закрыла <b>3 задачи</b> в проекте «Froject MVP»</span>
+          <span class="av-time">12:42</span>
+        </div>
+        <div class="av-row">
+          <span class="av-dot" style="background:#5A8FC6"></span>
+          <span class="av-text">Новый тикет: «Календарь не показывает дедлайны»</span>
+          <span class="av-time">12:48</span>
+        </div>
+        <div class="av-row">
+          <span class="av-dot" style="background:#6CB48D"></span>
+          <span class="av-text"><b>AI Insights:</b> команда +12% к прошлой неделе</span>
+          <span class="av-time">13:00</span>
+        </div>
+        <div class="av-row">
+          <span class="av-dot" style="background:#C65A5A"></span>
+          <span class="av-text">Дедлайн через 24 часа: «Прототип календаря»</span>
+          <span class="av-time">13:10</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section cta-section">
+    <div class="cta-inner glass-card">
+      <h2 class="cta-title">Попробуйте Froject —<br><span class="grad">без карты, без обязательств</span></h2>
+      <p class="lead">14 дней Team-тарифа бесплатно. Без привязки карты, без автосписания. После — можете остаться на Basic навсегда.</p>
+      <div class="cta-buttons">
+        <button class="btn-primary big" data-auth="register">Начать бесплатно</button>
+        <a class="btn-link" href="index.html?demo=1">Открыть демо без регистрации →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="brand-mark"></span>
+        <span class="brand-name">Froject</span>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <h4>Продукт</h4>
+          <a href="#modules">Модули</a>
+          <a href="#ai">AI</a>
+          <a href="#pricing">Тарифы</a>
+        </div>
+        <div>
+          <h4>Компания</h4>
+          <a href="#about">О нас</a>
+          <a href="#">Блог</a>
+          <a href="#">Карьера</a>
+        </div>
+        <div>
+          <h4>Ресурсы</h4>
+          <a href="#">Документация</a>
+          <a href="#">API</a>
+          <a href="#">Статус</a>
+        </div>
+        <div>
+          <h4>Связь</h4>
+          <a href="mailto:hello@fmail.ru">hello@fmail.ru</a>
+          <a href="#">Поддержка</a>
+          <a href="#">Telegram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span>© 2026 Froject. Все права защищены.</span>
+      <span class="footer-links">
+        <a href="#">Политика</a>
+        <a href="#">Условия</a>
+        <a href="#">Cookie</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- AUTH MODAL -->
+  <div class="auth-modal" id="auth-modal" hidden>
+    <div class="auth-backdrop" data-close-auth></div>
+    <div class="auth-dialog">
+      <button class="auth-close" id="auth-close" aria-label="Закрыть">×</button>
+      <div class="auth-grid">
+        <div class="auth-left">
+          <div class="auth-brand">
+            <span class="brand-mark"></span>
+            <span class="brand-name">Froject</span>
+          </div>
+          <h3 class="auth-pitch">AI-управляемая работа.<br>В одном окне.</h3>
+          <ul class="auth-bullets">
+            <li><span class="ab-i">✦</span> Smart Scheduling без созвонов «давайте определимся»</li>
+            <li><span class="ab-i">⚡</span> Контекст задач, календарь, почта в одной среде</li>
+            <li><span class="ab-i">📊</span> Аналитика и прогнозы — встроено</li>
+            <li><span class="ab-i">🛡</span> Роли, доступы, SLA</li>
+          </ul>
+          <div class="auth-trust">
+            <span class="trust-pill">2k+ команд</span>
+            <span class="trust-pill">4.8★ рейтинг</span>
+            <span class="trust-pill">14 дней бесплатно</span>
+          </div>
+        </div>
+        <div class="auth-right">
+          <div class="auth-tabs">
+            <button class="atb active" data-tab="login">Вход</button>
+            <button class="atb" data-tab="register">Регистрация</button>
+          </div>
+
+          <form class="auth-form" id="login-form">
+            <div class="af-row">
+              <label class="af-label">Email или логин</label>
+              <input type="text" id="login-email" placeholder="you@fmail.ru" autocomplete="username" required>
+            </div>
+            <div class="af-row">
+              <label class="af-label">Пароль</label>
+              <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
+            </div>
+            <div class="af-meta">
+              <label class="checkbox">
+                <input type="checkbox" id="login-remember">
+                <span>Запомнить меня</span>
+              </label>
+              <a href="#" class="forgot">Забыли пароль?</a>
+            </div>
+            <button class="btn-primary big full" type="submit">Войти</button>
+            <div class="af-hint">Демо: <span class="mono">любой логин / любой пароль</span></div>
+          </form>
+
+          <form class="auth-form" id="register-form" hidden>
+            <div class="af-row">
+              <label class="af-label">Имя</label>
+              <input type="text" id="reg-name" placeholder="Александр Петров" autocomplete="name" required>
+            </div>
+            <div class="af-row">
+              <label class="af-label">Email</label>
+              <input type="email" id="reg-email" placeholder="you@fmail.ru" autocomplete="email" required>
+            </div>
+            <div class="af-row">
+              <label class="af-label">Пароль</label>
+              <input type="password" id="reg-password" placeholder="Минимум 6 символов" autocomplete="new-password" minlength="6" required>
+            </div>
+            <div class="af-row">
+              <label class="af-label">Команда / компания</label>
+              <input type="text" id="reg-team" placeholder="Froject Team" required>
+            </div>
+            <div class="af-row">
+              <label class="af-label">Роль в команде</label>
+              <select id="reg-role">
+                <option value="user">Базовый пользователь</option>
+                <option value="manager" selected>Менеджер проекта</option>
+                <option value="admin">Администратор</option>
+              </select>
+            </div>
+            <label class="checkbox terms">
+              <input type="checkbox" id="reg-terms" required>
+              <span>Согласен с <a href="#">Условиями</a> и <a href="#">Политикой</a></span>
+            </label>
+            <button class="btn-primary big full" type="submit">Создать аккаунт</button>
+            <div class="af-hint">Адрес почты будет создан как <span class="mono" id="reg-mail-preview">user@fmail.ru</span></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="landing.js" defer></script>
+</body>
+</html>
